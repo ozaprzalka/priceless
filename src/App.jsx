@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 import { MembersComponent } from "./components/members/members-component";
 import { LoginComponent } from "./components/login/login-component";
 import { RegisterComponent } from "./components/register/register-component";
@@ -18,10 +18,24 @@ function App() {
           <HeaderComponent></HeaderComponent>
         </header>
         <HashRouter>
-        <Route exact path="/" component={AboutComponent} />
-          <Route path="/register" component={RegisterComponent} />
-          <Route path="/login" component={LoginComponent} />
-          <Route path="/members" component={MembersComponent} />
+          <Switch>
+            {/* <Route exact path="/" component={AboutComponent} />
+            <Route path="/register" component={RegisterComponent} />
+            <Route path="/login" component={LoginComponent} />
+            <Route path="/members" component={MembersComponent} /> */}
+            <Route exact path="/">
+              <AboutComponent />
+            </Route>
+            <Route path="/register">
+              <RegisterComponent />
+            </Route>
+            <Route path="/login">
+              <LoginComponent />
+            </Route>
+            <Route path="/members">
+              <MembersComponent />
+            </Route>
+          </Switch>
         </HashRouter>
       </div>
     </>

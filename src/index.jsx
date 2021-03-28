@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Grommet } from 'grommet'
+import { customTheme } from "./styles";
 
 
 ReactDOM.render(
-  <Grommet>
+  <Grommet theme={customTheme}>
     <App/>
     </Grommet>,
   document.getElementById('root')

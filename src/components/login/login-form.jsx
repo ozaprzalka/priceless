@@ -1,62 +1,65 @@
 import React, { useState, useCallback, useContext } from "react";
 
 import { Box, Button, Form, FormField, TextInput } from "grommet";
-import { formStyle } from "../../styles";
+import { formStyle, loginStyle } from "../../styles";
 import app from "../../base";
 import { AuthContext } from "./../../Auth";
 import { withRouter, Redirect } from "react-router";
 
-const LoginForm = ({history}) => {
+const LoginForm = ({ history }) => {
   const [value, setValue] = useState({
     username: "",
     password: "",
   });
-  const handleLogin = useCallback (async e => {
+  const [error, setError] = useState();
+
+  const handleLogin = useCallback(
+    async (e) => {
       e.preventDefault();
       try {
-          await app
-            .auth()
-            .signInWithEmailAndPassword(e.value.username, e.value.password);
-        history.push('/members');
+        await app
+          .auth()
+          .signInWithEmailAndPassword(e.value.username, e.value.password);
+        history.push("/members");
       } catch (err) {
-          console.log(err);
+        console.log(err);
+        setError(err.message);
       }
-  }, [history]);
+    },
+    [history]
+  );
   const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {
-      return <Redirect to="/members" />
+    return <Redirect to="/members" />;
   }
+
   return (
     <>
-      <Box align="center" justify="center" pad="xlarge"  style={formStyle}>
-          <Box width="large" >
-          <Form align="center"
-          value={value}
-          validate="change"
-          onChange={(nextValue) => setValue(nextValue)}
-          onSubmit={handleLogin
-          }
-        >
-          <FormField
-            name="username"
-            label="Username"
-            required
+      <Box align="center" justify="center" pad="xlarge" style={formStyle}>
+        <Box style={loginStyle}>{error}</Box>
+        <Box width="large">
+          <Form
+            align="center"
+            value={value}
+            validate="change"
+            onChange={(nextValue) => setValue(nextValue)}
+            onSubmit={handleLogin}
           >
-            <TextInput type="username" name="username"/>
-          </FormField>
-          <FormField
-            name="password"
-            label="Password"
-            type="password"
-            required
-          >
-            <TextInput type="password" name="password" />
-          </FormField>
-          <Button size="large" type="submit" label="LOGIN" primary />
-        </Form>
-          </Box>
-
+            <FormField name="username" label="Username" required>
+              <TextInput type="username" name="username" />
+            </FormField>
+            <FormField
+              name="password"
+              label="Password"
+              type="password"
+              required
+            >
+              <TextInput type="password" name="password" />
+            </FormField>
+            <Button size="large" type="submit" label="LOGIN" primary />
+          </Form>
+        </Box>
       </Box>
     </>
   );

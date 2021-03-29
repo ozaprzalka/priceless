@@ -78,12 +78,19 @@ const aboutStyle = {
   color: '#D4DFE6',
 }
 
+const loginStyle = {
+  marginBottom: '20px',
+  color: '#FF1D23',
+  textTransform: 'none'
+}
+
 export {
   bodyStyle,
   headerStyle,
   customFocus,
   formStyle,
-  aboutStyle
+  aboutStyle,
+  loginStyle
 }
 
 

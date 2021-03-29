@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { formStyle } from "../../styles";
 import {
   Box,
@@ -7,8 +7,10 @@ import {
   FormField,
   TextInput,
 } from "grommet";
+import { withRouter } from "react-router";
+import app from "../../base";
 
-export const RegisterForm = () => {
+const RegisterForm = ({history}) => {
   const [value, setValue] = useState({
     name: "",
     email: "",
@@ -16,14 +18,32 @@ export const RegisterForm = () => {
     confirmPassword: "",
   });
   const [valid, setValid] = useState(false);
-
+  // const handleSignup = useCallback (async e => {
+  //   e.preventDefault();
+  //   console.log(e.value.password);
+  //   try {
+  //     await app
+  //       .auth()
+  //   }
+  // })
+  const handleSignup = useCallback (async e => {
+    e.preventDefault();
+    try {
+      await app
+        .auth()
+        .createUserWithEmailAndPassword(e.value.email, e.value.password);
+      history.push("/members");
+    } catch (error) {
+      console.log(error);
+    }
+  }, [history]);
   return (
     // <Grommet >
       <Box fill align="center" justify="center" style={formStyle}>
         <Box width="medium">
           <Form
             validate="change"
-            // onSubmit={({ value }) => console.log("Submit", value)}
+            onSubmit={handleSignup}
             onValidate={(validationResults) => {
               console.log("validationResults = ", validationResults);
               setValid(validationResults.valid);
@@ -34,9 +54,9 @@ export const RegisterForm = () => {
             //   console.log('value', value, 'nextValue', nextValue);
             //   setValue({ nextValue });
             // }}
-            onSubmit={event =>
-              console.log('Submit', event.value)
-            }
+            // onSubmit={event =>
+            //   console.log('Submit', event.value)
+            // }
             // onSubmit={({ value: nextValue }) => console.log(nextValue)}
           >
             <FormField
@@ -98,3 +118,5 @@ export const RegisterForm = () => {
     // </Grommet>
   );
 };
+
+export default withRouter(RegisterForm);

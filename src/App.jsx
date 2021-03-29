@@ -8,21 +8,20 @@ import { AboutComponent } from "./components/dashboard/about-component";
 
 import { bodyStyle } from "./styles";
 import { Reset } from "styled-reset";
+import {AuthProvider} from "./Auth";
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
   return (
     <>
       <Reset />
+      <AuthProvider>
       <div className="App" style={bodyStyle}>
         <header className="App-header">
           <HeaderComponent></HeaderComponent>
         </header>
         <HashRouter>
           <Switch>
-            {/* <Route exact path="/" component={AboutComponent} />
-            <Route path="/register" component={RegisterComponent} />
-            <Route path="/login" component={LoginComponent} />
-            <Route path="/members" component={MembersComponent} /> */}
             <Route exact path="/">
               <AboutComponent />
             </Route>
@@ -32,12 +31,13 @@ function App() {
             <Route path="/login">
               <LoginComponent />
             </Route>
-            <Route path="/members">
+            <PrivateRoute path="/members">
               <MembersComponent />
-            </Route>
+            </PrivateRoute>
           </Switch>
         </HashRouter>
       </div>
+      </AuthProvider>
     </>
   );
 }

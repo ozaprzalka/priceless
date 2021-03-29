@@ -1,13 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useContext } from "react";
 
 import { Box, Button, Form, FormField, TextInput } from "grommet";
 import { formStyle } from "../../styles";
+import app from "../../base";
+import { AuthContext } from "./../../Auth";
+import { withRouter, Redirect } from "react-router";
 
-export const LoginForm = () => {
+const LoginForm = ({history}) => {
   const [value, setValue] = useState({
     username: "",
     password: "",
   });
+  const handleLogin = useCallback (async e => {
+      e.preventDefault();
+      try {
+          await app
+            .auth()
+            .signInWithEmailAndPassword(e.value.username, e.value.password);
+        history.push('/members');
+      } catch (err) {
+          console.log(err);
+      }
+  }, [history]);
+  const { currentUser } = useContext(AuthContext);
+
+  if (currentUser) {
+      return <Redirect to="/members" />
+  }
   return (
     <>
       <Box align="center" justify="center" pad="xlarge"  style={formStyle}>
@@ -16,8 +35,7 @@ export const LoginForm = () => {
           value={value}
           validate="change"
           onChange={(nextValue) => setValue(nextValue)}
-          onSubmit={event =>
-            console.log('Submit', event.value)
+          onSubmit={handleLogin
           }
         >
           <FormField
@@ -43,3 +61,5 @@ export const LoginForm = () => {
     </>
   );
 };
+
+export default withRouter(LoginForm);

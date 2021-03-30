@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import { formStyle } from "../../styles";
 import {
   Box,
@@ -9,8 +9,14 @@ import {
 } from "grommet";
 import { withRouter } from "react-router";
 import app from "../../base";
+import {db, database} from "../../base"
+import { AuthContext } from "../../Auth";
+
+
 
 const RegisterForm = ({history}) => {
+  const {currentUser} = useContext(AuthContext);
+
   const [value, setValue] = useState({
     name: "",
     email: "",
@@ -18,27 +24,34 @@ const RegisterForm = ({history}) => {
     confirmPassword: "",
   });
   const [valid, setValid] = useState(false);
-  // const handleSignup = useCallback (async e => {
-  //   e.preventDefault();
-  //   console.log(e.value.password);
-  //   try {
-  //     await app
-  //       .auth()
-  //   }
-  // })
+
   const handleSignup = useCallback (async e => {
     e.preventDefault();
+    function writeUserData({user}) {
+      db('users/' + user.uid).set(user).catch(error => {
+          console.log(error.message)
+      });
+  }
     try {
-      await app
+      app
         .auth()
-        .createUserWithEmailAndPassword(e.value.email, e.value.password);
+        .createUserWithEmailAndPassword(e.value.email, e.value.password)
+      let user = {
+        uid: currentUser.uid,
+        name: e.value.name,
+        email: e.value.email,
+        password: e.value.password,
+      };
+      database.collection("users").doc(currentUser.uid).set(user);
+      // writeUserData(user);
       history.push("/members");
     } catch (error) {
       console.log(error);
     }
+    console.log('all: ',currentUser, 'uid only: ', currentUser.uid);
+
   }, [history]);
   return (
-    // <Grommet >
       <Box fill align="center" justify="center" style={formStyle}>
         <Box width="medium">
           <Form
@@ -50,14 +63,6 @@ const RegisterForm = ({history}) => {
             }}
             value={value}
             onChange={(nextValue) => setValue(nextValue)}
-            // onSubmit={({ value: nextValue }) => {
-            //   console.log('value', value, 'nextValue', nextValue);
-            //   setValue({ nextValue });
-            // }}
-            // onSubmit={event =>
-            //   console.log('Submit', event.value)
-            // }
-            // onSubmit={({ value: nextValue }) => console.log(nextValue)}
           >
             <FormField
               label="Username"
@@ -115,7 +120,6 @@ const RegisterForm = ({history}) => {
           </Form>
         </Box>
       </Box>
-    // </Grommet>
   );
 };
 

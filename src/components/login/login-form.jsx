@@ -13,18 +13,37 @@ const LoginForm = ({ history }) => {
   });
   const [error, setError] = useState();
 
+//   const getData = () => {
+//     function getUserData(uid) {
+//         app.database().ref('users/' + uid).once("value", snap => {
+//             console.log(snap.val())
+//         })
+//     }
+//   }
+
   const handleLogin = useCallback(
     async (e) => {
       e.preventDefault();
-      try {
-        await app
+    //   try {
+        app
           .auth()
-          .signInWithEmailAndPassword(e.value.username, e.value.password);
-        history.push("/members");
-      } catch (err) {
+          .signInWithEmailAndPassword(e.value.username, e.value.password)
+          
+          .then(() => {
+              history.push("/members");
+            //   console.log(user.uid)
+            }) 
+        .catch ((err) => {
         console.log(err);
         setError(err.message);
-      }
+      })
+
+    //   const usersRef = app.database.ref('users');
+    //   const newUserRef = usersRef.push();
+    //   newUserRef.set({
+    //     username: e.value.username,
+    //     password: e.value.password
+    //   }) 
     },
     [history]
   );

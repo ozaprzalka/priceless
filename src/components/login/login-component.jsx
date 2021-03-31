@@ -1,7 +1,7 @@
 import React from 'react';
-
+import LoginForm from './login-form'
 export const LoginComponent = () => (
 <div className="dashboard">
-Inside Login route
+<LoginForm></LoginForm>
 </div>
 );

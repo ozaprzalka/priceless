@@ -1,10 +1,12 @@
 import React from "react";
+import { Box, Text } from 'grommet'
 import { aboutStyle } from "../../styles";
 
 export const AboutComponent = () => (
-  <div className="dashboard" style={aboutStyle}>
-    <div>
-      <strong>Lubisz oszczędzać na ulubionych produktach? </strong> Kto nie
+  <Box>
+      <div className="dashboard" style={aboutStyle}>
+    <Text>
+      Lubisz oszczędzać na ulubionych produktach? Kto nie
       lubi? A może jesteś zawodowym łowcą najlepszych okazji? Z nami Twoje
       polowania mogą stać się prostsze! Zarejestruj się w XXX, aby dostawać
       powiadomienia za każdym razem, kiedy cena wymarzonego produktu spadnie.
@@ -17,6 +19,8 @@ export const AboutComponent = () => (
         <li style={{margin: '30px'}}>4. Poczekaj na powiadomomienie o spadku ceny</li>
         <li style={{margin: '30px'}}>5. Ciesz się zaoszczędzonymi pieniędzmi!</li>
       </ul>
-    </div>
+    </Text>
   </div>
+  </Box>
+
 );

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Grommet, Header, Anchor, Box, ResponsiveContext, Menu } from 'grommet';
 import { Menu as MenuIcon } from 'grommet-icons';
-import { grommet } from 'grommet/themes';
+import { headerStyle, customFocus } from "../../styles";
 
 export const HeaderComponent = () => (
-  <Grommet theme={grommet}>
-    <Header background="light-4" pad="medium" height="xsmall">
+  <Grommet theme={ customFocus }>
+    <Header background="light-4" pad="medium" height="xsmall" style={ headerStyle }>
       <Anchor
         href="/#"
         

@@ -3,16 +3,14 @@ import "firebase/auth";
 import 'firebase/database';
 import 'firebase/firestore';
 
-console.log(process.env)
-
 const app = firebase.initializeApp({
-    apiKey: "AIzaSyB0Lbl3hB3XpjQEWciOEWt9aH9QXcgA53Y",
-    authDomain: "so-priceless.firebaseapp.com",
-    databaseURL: "https://so-priceless-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "so-priceless",
-    storageBucket: "so-priceless.appspot.com",
-    messagingSenderId: "805844033307",
-    appId: "1:805844033307:web:c0e60c20a8a6b658e93dbe"
+    apiKey: process.env.REACT_APP_FIREBASE_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID
 });
 
 const db = firebase.database().ref();

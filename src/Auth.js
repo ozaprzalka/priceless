@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
         if (user) {
             setCurrentUser(user)
             setPending(false)
+            console.log(pending)
             console.log('from auth', user.uid)
         } else {
             setCurrentUser(null)

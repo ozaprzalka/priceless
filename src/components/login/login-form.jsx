@@ -1,9 +1,8 @@
-import React, { useState, useCallback, useContext } from "react";
+import React, { useState, useCallback } from "react";
 import { Box, Button, Form, FormField, TextInput } from "grommet";
 import { formStyle, loginStyle } from "../../styles";
 import app from "../../base";
-import { AuthContext } from "./../../Auth";
-import { withRouter, Redirect } from "react-router";
+import { withRouter } from "react-router";
 
 const LoginForm = ({ history }) => {
   const [value, setValue] = useState({
@@ -15,25 +14,20 @@ const LoginForm = ({ history }) => {
   const handleLogin = useCallback(
     async (e) => {
       e.preventDefault();
-        app
-          .auth()
-          .signInWithEmailAndPassword(e.value.username, e.value.password)
-          
-          .then(() => {
-              history.push("/members");
-            }) 
-        .catch ((err) => {
-        console.log(err);
-        setError(err.message);
-      })
+      app
+        .auth()
+        .signInWithEmailAndPassword(e.value.username, e.value.password)
+
+        .then(() => {
+          history.push("/members");
+        })
+        .catch((err) => {
+          console.log(err);
+          setError(err.message);
+        });
     },
     [history]
   );
-  const { currentUser } = useContext(AuthContext);
-
-  if (currentUser) {
-    return <Redirect to="/members" />;
-  }
 
   return (
     <>

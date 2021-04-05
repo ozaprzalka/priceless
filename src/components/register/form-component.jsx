@@ -6,7 +6,6 @@ import app from "../../base";
 import { database } from "../../base";
 
 const RegisterForm = ({ history }) => {
-
   const [value, setValue] = useState({
     name: "",
     email: "",
@@ -23,7 +22,7 @@ const RegisterForm = ({ history }) => {
       .then(() => {
         history.push("/members");
         let loggedIn = app.auth().currentUser;
-        console.log('then', loggedIn.uid)
+        console.log("then", loggedIn.uid);
         let user = {
           name: e.value.name,
           email: e.value.email,
@@ -32,10 +31,17 @@ const RegisterForm = ({ history }) => {
         };
         database.collection("users").doc(user.uid).set(user);
       })
+      .then(function () {
+        console.log("name?", e.value.name);
+        return app.auth().currentUser.updateProfile({
+          displayName: e.value.name,
+        });
+      })
       .catch((error) => {
         console.log(error);
       });
   };
+
   return (
     <Box fill align="center" justify="center" style={formStyle}>
       <Box width="medium">

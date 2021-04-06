@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import app from "./../../base";
 import { Redirect } from "react-router";
 import { AuthContext } from "../../Auth";
@@ -44,26 +44,46 @@ const MembersDashboard = ({ history }) => {
     let savedLink = {
       links: [...links, link],
     };
-    database.collection("links").doc(currentUser.uid).set(savedLink);
+    if (currentUser && database.collection("links").doc(currentUser.uid)) {
+        database.collection("links").doc(currentUser.uid).update(savedLink)
+    } else {
+        database.collection("links").doc(currentUser.uid).set(savedLink)
+
+    }
   };
   const handleChange = (e) => {
     e.preventDefault();
     setLink(e.target.value);
   };
 
-  // const renderLinks = (e) => {
-  //     database.collection("links").get().then(links => {
-  //         links.forEach(doc => {
-  //             return (
-  //                 <Text>{doc}</Text>
-  //             )
-  //         })
-  //     })
-  // }
+  const getLinks = () => {
+    if (currentUser && database.collection("links").doc(currentUser.uid)) {
+      let myLinks = database.collection("links").doc(currentUser.uid);
+      myLinks.onSnapshot((doc) => {
+        console.log("current data", doc.data());
+        console.log("current data", doc.data().links);
+        setLinks(doc.data().links);
+      });
+    } else {
+      return;
+    }
+  };
+
+  useEffect(() => {
+    getLinks();
+    return () => links;
+  }, []);
+
 
   return (
     <>
-      <Box fill align="center" justify="center" style={formStyle}>
+      <Box
+        fill
+        align="center"
+        justify="center"
+        style={formStyle}
+        onLoad={getLinks}
+      >
         <Button onClick={handleLogout} primary>
           Sign out
         </Button>
@@ -79,6 +99,9 @@ const MembersDashboard = ({ history }) => {
               </Button>
             </Box>
           </Form>
+          <Button type="submit" onClick={getLinks}>
+            Refresh
+          </Button>
           <List data={links}></List>
         </Box>
       </Box>

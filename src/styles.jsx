@@ -76,6 +76,7 @@ const formStyle = {
 const aboutStyle = {
   margin: '10% 20%',
   color: '#D4DFE6',
+  height: '100%'
 }
 
 const loginStyle = {
@@ -84,13 +85,35 @@ const loginStyle = {
   textTransform: 'none'
 }
 
+const cardStyle = {
+  backgroundColor: '#DADADA',
+  color: '#601cff',
+  padding: '5% 0',
+}
+
+const inputStyle = {
+  backgroundColor: 'white',
+  border: '1px solid #601cff',
+  margin: '10px 0',
+  borderRadius: '10px'
+}
+
+const buttonStyle = {
+  padding: '2px 10px',
+  margin: '2px 5px',
+  textTransform: 'uppercase'
+}
+
 export {
   bodyStyle,
   headerStyle,
   customFocus,
   formStyle,
   aboutStyle,
-  loginStyle
+  loginStyle,
+  cardStyle,
+  inputStyle,
+  buttonStyle
 }
 
 

@@ -1,9 +1,7 @@
-import React, { useContext, useState, useEffect, useCallback } from "react";
-import app from "./../../base";
-import { Redirect } from "react-router";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Auth";
 import { database } from "../../base";
-import { formStyle } from "../../styles";
+import { formStyle, cardStyle, inputStyle, buttonStyle } from "../../styles";
 import { withRouter } from "react-router";
 
 import {
@@ -12,29 +10,16 @@ import {
   Form,
   FormField,
   TextInput,
-  Paragraph,
-  List,
+  Card,
+  CardBody,
+  Text,
+  InfiniteScroll,
 } from "grommet";
 
-const MembersDashboard = ({ history }) => {
+const MembersDashboard = () => {
   const { currentUser } = useContext(AuthContext);
-  const [link, setLink] = useState();
+  const [link, setLink] = useState('');
   const [links, setLinks] = useState([]);
-
-  const handleLogout = useCallback(
-    async (e) => {
-      e.preventDefault();
-      try {
-        app.auth().signOut();
-        console.log("out");
-        history.push("/login");
-      } catch (err) {
-        console.log(err);
-      }
-      return <Redirect to="/login" />;
-    },
-    [history]
-  );
 
   const addLink = (e) => {
     e.preventDefault();
@@ -44,12 +29,11 @@ const MembersDashboard = ({ history }) => {
     let savedLink = {
       links: [...links, link],
     };
-    database.collection("links").doc(currentUser.uid).set(savedLink)
+    // database.collection("links").doc(currentUser.uid).set(savedLink);
     if (currentUser && database.collection("links").doc(currentUser.uid)) {
-        database.collection("links").doc(currentUser.uid).update(savedLink)
+      database.collection("links").doc(currentUser.uid).update(savedLink);
     } else {
-        database.collection("links").doc(currentUser.uid).set(savedLink)
-
+      database.collection("links").doc(currentUser.uid).set(savedLink);
     }
   };
   const handleChange = (e) => {
@@ -58,7 +42,11 @@ const MembersDashboard = ({ history }) => {
   };
 
   const getLinks = () => {
-    if (currentUser && database.collection("links") && database.collection("links").doc(currentUser.uid)) {
+    if (
+      currentUser &&
+      database.collection("links") &&
+      database.collection("links").doc(currentUser.uid)
+    ) {
       let myLinks = database.collection("links").doc(currentUser.uid);
       myLinks.onSnapshot((doc) => {
         console.log("current data", doc.data());
@@ -66,7 +54,7 @@ const MembersDashboard = ({ history }) => {
         setLinks(doc.data().links);
       });
     } else {
-      setLinks([])
+      setLinks("");
     }
   };
 
@@ -75,39 +63,76 @@ const MembersDashboard = ({ history }) => {
     return () => links;
   }, []);
 
-
   return (
     <>
-      <Box
-        fill
-        align="center"
-        justify="center"
-        style={formStyle}
-        onLoad={getLinks}
-      >
-        <Button onClick={handleLogout} primary>
-          Sign out
-        </Button>
-        <Box width="medium">
-          <Paragraph>Your saved links</Paragraph>
-          <Form onSubmit={addLink}>
-            <FormField value={link} onChange={handleChange}>
-              <TextInput></TextInput>
-            </FormField>
-            <Box>
-              <Button type="submit" primary>
-                Add new
-              </Button>
+      <Box align="center" justify="center" style={formStyle} onLoad={getLinks}>
+        <Card width="large">
+          <CardBody className="card_body" style={cardStyle} overflow="auto">
+            <Box align="center">
+              <Text size="large" text-align="center" weight="bold">
+                Your saved links
+              </Text>
+              <Form onSubmit={addLink}>
+                <FormField
+                  width="medium"
+                  style={inputStyle}
+                  value={link}
+                  placeholder="paste url here"
+                  onChange={handleChange}
+                >
+                  <TextInput></TextInput>
+                </FormField>
+                <Box width="medium" direction="row">
+                  <Button
+                    type="submit"
+                    align="center"
+                    primary
+                    style={buttonStyle}
+                  >
+                    Add new
+                  </Button>
+                  <Button
+                    type="submit"
+                    primary
+                    onClick={getLinks}
+                    style={buttonStyle}
+                  >
+                    Refresh
+                  </Button>
+                </Box>
+              </Form>
+              <InfiniteScroll
+                items={links}
+                step={100}
+              >
+                {(link, index) => (
+                  <Box
+                    flex={false}
+                    pad="medium"
+                    key={index}
+                    border={{ side: "bottom" }}
+                  >
+                    <Text>{link}</Text>
+                  </Box>
+                )}
+              </InfiniteScroll>
             </Box>
-          </Form>
-          <Button type="submit" onClick={getLinks}>
-            Refresh
-          </Button>
-          <List data={links}></List>
-        </Box>
+          </CardBody>
+        </Card>
       </Box>
     </>
   );
 };
+
+<Card>
+  <CardBody className="card_body">
+    <Box direction="row" className="item_box">
+      <Text className="text"></Text>
+      <Box className="button_box">
+        <Button>Delete</Button>
+      </Box>
+    </Box>
+  </CardBody>
+</Card>;
 
 export default withRouter(MembersDashboard);

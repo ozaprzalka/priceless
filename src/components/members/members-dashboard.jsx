@@ -43,8 +43,8 @@ const MembersDashboard = ({ history }) => {
     }
   };
 
-  const getLinks1 = () => {
-    if (currentUser && database.collection("links").doc(currentUser.uid)) {
+  const getLinks2 = () => {
+    if (currentUser && database.collection("links") && database.collection("links").doc(currentUser.uid)) {
       let myLinks = database.collection("links").doc(currentUser.uid);
       myLinks.onSnapshot((doc) => {
         console.log("current data", doc.data());
@@ -52,7 +52,7 @@ const MembersDashboard = ({ history }) => {
         setLinks(doc.data().links);
       });
     } else {
-      return;
+      setLinks([])
     }
   };
 

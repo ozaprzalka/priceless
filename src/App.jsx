@@ -11,16 +11,19 @@ import { bodyStyle } from "./styles";
 import { Reset } from "styled-reset";
 import { AuthProvider } from "./Auth";
 import PrivateRoute from "./PrivateRoute";
+import { Box, Text } from "grommet";
+
 
 function App() {
   return (
     <>
       <Reset />
       <AuthProvider>
-        <div className="App" style={bodyStyle}>
-          <header className="App-header">
+        {/* <div className="App" style={bodyStyle}> */}
+        <Box fill style={bodyStyle}>
+          {/* <header className="App-header"> */}
             <HeaderComponent></HeaderComponent>
-          </header>
+          {/* </header> */}
           <HashRouter>
             <Switch>
               <Route exact path="/">
@@ -36,7 +39,8 @@ function App() {
               <PrivateRoute component={AccountPage} path="/account" exact />
             </Switch>
           </HashRouter>
-        </div>
+          </Box>
+        {/* </div> */}
       </AuthProvider>
     </>
   );

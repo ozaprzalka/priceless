@@ -57,7 +57,7 @@ const bodyStyle = {
   // fontFamily: 'Parisienne, cursive',
   backgroundColor: '#2f3541',
   width: '100vw',
-  height: '100vh',
+  height: '100%',
   color: '#D4DFE6',
 }
 

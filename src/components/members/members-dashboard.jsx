@@ -44,6 +44,7 @@ const MembersDashboard = ({ history }) => {
     let savedLink = {
       links: [...links, link],
     };
+    database.collection("links").doc(currentUser.uid).set(savedLink)
     if (currentUser && database.collection("links").doc(currentUser.uid)) {
         database.collection("links").doc(currentUser.uid).update(savedLink)
     } else {
@@ -57,7 +58,7 @@ const MembersDashboard = ({ history }) => {
   };
 
   const getLinks = () => {
-    if (currentUser && database.collection("links").doc(currentUser.uid)) {
+    if (currentUser && database.collection("links") && database.collection("links").doc(currentUser.uid)) {
       let myLinks = database.collection("links").doc(currentUser.uid);
       myLinks.onSnapshot((doc) => {
         console.log("current data", doc.data());
@@ -65,7 +66,7 @@ const MembersDashboard = ({ history }) => {
         setLinks(doc.data().links);
       });
     } else {
-      return;
+      setLinks([])
     }
   };
 

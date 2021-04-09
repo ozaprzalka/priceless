@@ -1,11 +1,11 @@
 import React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
-import { MembersComponent } from "./components/members/members-component";
 import { LoginComponent } from "./components/login/login-component";
 import { RegisterComponent } from "./components/register/register-component";
 import { HeaderComponent } from "./components/header/header-component";
 import { AboutComponent } from "./components/dashboard/about-component";
-import { AccountComponent } from "./components/account/account-component";
+import AccountPage from "./components/account/account-page";
+import MembersDashboard from "./components/members/members-dashboard";
 
 import { bodyStyle } from "./styles";
 import { Reset } from "styled-reset";
@@ -32,12 +32,8 @@ function App() {
               <Route path="/login">
                 <LoginComponent />
               </Route>
-              <PrivateRoute path="/members">
-                <MembersComponent />
-              </PrivateRoute>
-              <PrivateRoute path="/account">
-                <AccountComponent />
-              </PrivateRoute>
+              <PrivateRoute component={MembersDashboard} path="/members" exact />
+              <PrivateRoute component={AccountPage} path="/account" exact />
             </Switch>
           </HashRouter>
         </div>

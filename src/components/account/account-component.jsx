@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
 import { Redirect } from "react-router";
 import { AuthContext } from "../../Auth";
-import MembersDashboard from "./members-dashboard";
+import AccountPage from "./account-page";
 
-export const MembersComponent = () => {
+export const AccountComponent = () => {
   const { currentUser } = useContext(AuthContext);
   return (
     <div>
-      {currentUser === null ? (
+      Inside Account route
+      {/* {currentUser === null ? (
         <Redirect to="/login" />
       ) : (
-        <Redirect to="/members" />
-      )}
-      <MembersDashboard></MembersDashboard>
+        <Redirect to="/account" />
+      )} */}
+      <AccountPage></AccountPage>
     </div>
   );
 };

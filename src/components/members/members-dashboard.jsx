@@ -36,7 +36,7 @@ const MembersDashboard = ({ history }) => {
   );
 
   const addLink = (e) => {
-    if (link && link != undefined) {
+    if (link && link !== undefined) {
       database.collection("links").doc(currentUser.uid).set({
         link: link
       });

@@ -7,7 +7,7 @@ export const AccountComponent = () => {
   const { currentUser } = useContext(AuthContext);
   return (
     <div>
-      Inside Account route
+
       {/* {currentUser === null ? (
         <Redirect to="/login" />
       ) : (

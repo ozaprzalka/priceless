@@ -6,13 +6,13 @@ import MembersDashboard from "./members-dashboard";
 export const MembersComponent = () => {
   const { currentUser } = useContext(AuthContext);
   return (
-    <div>
+    <>
       {currentUser === null ? (
         <Redirect to="/login" />
       ) : (
         <Redirect to="/members" />
       )}
       <MembersDashboard></MembersDashboard>
-    </div>
+    </>
   );
 };

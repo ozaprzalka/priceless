@@ -104,6 +104,15 @@ const buttonStyle = {
   textTransform: 'uppercase'
 }
 
+const boxStyle = {
+  minHeight: '250px',
+  textTransform: 'uppercase',
+  fontWeight: 'bold',
+  backgroundColor: '#2f3541',
+  margin: '10% 0',
+  color: '#D4DFE6',
+}
+
 export {
   bodyStyle,
   headerStyle,
@@ -113,7 +122,8 @@ export {
   loginStyle,
   cardStyle,
   inputStyle,
-  buttonStyle
+  buttonStyle,
+  boxStyle
 }
 
 

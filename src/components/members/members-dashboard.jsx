@@ -1,8 +1,7 @@
-import React, { useContext, useState, useEffect, useCallback } from "react";
-import app, { db } from "./../../base";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Auth";
 import { database } from "../../base";
-import { formStyle, cardStyle, inputStyle, buttonStyle } from "../../styles";
+import { boxStyle, cardStyle, inputStyle, buttonStyle } from "../../styles";
 import { withRouter } from "react-router";
 
 import {
@@ -19,15 +18,32 @@ import {
 
 const MembersDashboard = () => {
   const { currentUser } = useContext(AuthContext);
-  const [link, setLink] = useState('');
+  const [link, setLink] = useState("");
   const [links, setLinks] = useState([]);
 
-  const addLink = (e) => {
+  const addLink1 = (e) => {
+    e.preventDefault();
     if (link && link !== undefined) {
       database.collection("links").doc(currentUser.uid).set({
-        link: link
+        links: link,
       });
     }
+  };
+
+  const addLink = (e) => {
+    e.preventDefault();
+    console.log(link);
+    setLinks((links) => [...links, link]);
+    console.log(links);
+    let savedLink = {
+      links: [...links, link],
+    };
+    database.collection("links").doc(currentUser.uid).set(savedLink);
+    // if (currentUser && database.collection("links").doc(currentUser.uid)) {
+    //   database.collection("links").doc(currentUser.uid).update(savedLink);
+    // } else {
+    //   database.collection("links").doc(currentUser.uid).set(savedLink);
+    // }
   };
 
   const handleChange = (e) => {
@@ -35,35 +51,31 @@ const MembersDashboard = () => {
     setLink(e.target.value);
   };
 
-  const getLinks2 = () => {
-    if (
-      currentUser &&
-      database.collection("links") &&
-      database.collection("links").doc(currentUser.uid)
-    ) {
+  const getLinks = () => {
+    if (currentUser && database.collection("links").doc(currentUser.uid)) {
       let myLinks = database.collection("links").doc(currentUser.uid);
       myLinks.onSnapshot((doc) => {
         console.log("current data", doc.data());
-        console.log("current data", doc.data().links);
-        setLinks(doc.data().links);
+        if (doc.data() !== undefined) {
+          console.log("current data", doc.data().links);
+          setLinks(doc.data().links);
+        }
       });
     } else {
       setLinks("");
     }
   };
 
-  const getLinks = () => {
+  const getLinks1 = () => {
     if (currentUser && database.collection("links").doc(currentUser.uid)) {
       let myLinks = database.collection("links").doc(currentUser.uid);
       myLinks.get().then((doc) => {
-          if (doc.exists) {
-            console.log("Doc data: " + doc.data());
-          }
-          else {
-            console.log("Nie ma");
-          }
-        } 
-      )
+        if (doc.exists) {
+          console.log("Doc data: " + doc.data());
+        } else {
+          console.log("Nie ma");
+        }
+      });
     } else {
       return;
     }
@@ -76,7 +88,7 @@ const MembersDashboard = () => {
 
   return (
     <>
-      <Box align="center" justify="center" style={formStyle} onLoad={getLinks}>
+      <Box align="center" justify="center" style={boxStyle} onLoad={getLinks}>
         <Card width="large">
           <CardBody className="card_body" style={cardStyle} overflow="auto">
             <Box align="center">
@@ -112,10 +124,7 @@ const MembersDashboard = () => {
                   </Button>
                 </Box>
               </Form>
-              <InfiniteScroll
-                items={links}
-                step={100}
-              >
+              <InfiniteScroll items={links} step={100}>
                 {(link, index) => (
                   <Box
                     flex={false}
@@ -135,15 +144,4 @@ const MembersDashboard = () => {
   );
 };
 
-<Card>
-  <CardBody className="card_body">
-    <Box direction="row" className="item_box">
-      <Text className="text"></Text>
-      <Box className="button_box">
-        <Button>Delete</Button>
-      </Box>
-    </Box>
-  </CardBody>
-</Card>;
-
-export default withRouter(MembersDashboard);
+export default MembersDashboard;

@@ -1,10 +1,5 @@
-import React, { useContext, useState, useCallback } from "react";
-// import app from './../../base'
+import React, { useContext } from "react";
 import { AuthContext } from "../../Auth";
-// import {database} from "../../base"
-import { customTheme } from "../../styles";
-// import { withRouter } from "react-router";
-import { Grommet } from 'grommet'
 
 
 import { Box, Text } from "grommet";
@@ -27,9 +22,6 @@ const AccountPage = () => {
         <Text> your username: {currentUser.displayName}</Text>
         <Text>{console.log(currentUser)}</Text>
       </Box>
-      {/* <Text>your email: {currentUser.email}</Text>
-      <Text> your username: {currentUser.displayName}</Text>
-      <Text>{console.log(currentUser)}</Text> */}
     </Box>
    
   );

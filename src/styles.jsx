@@ -63,6 +63,14 @@ const bodyStyle = {
 
 const headerStyle = {
   fontFamily: 'Kalam, cursive',
+  backgroundColor: 'white',
+  fontSize: '30px'
+}
+
+const smallHeaderStyle = {
+  fontFamily: 'Kalam, cursive',
+  color: '#601cff',
+  padding: '5% 0',
 }
 
 const formStyle = {
@@ -116,6 +124,7 @@ const boxStyle = {
 export {
   bodyStyle,
   headerStyle,
+  smallHeaderStyle,
   customFocus,
   formStyle,
   aboutStyle,

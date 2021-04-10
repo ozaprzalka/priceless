@@ -6,25 +6,21 @@ export const AboutPage = () => (
   <Box>
     <div className="dashboard" style={aboutStyle}>
       <Text>
-        Lubisz oszczędzać na ulubionych produktach? Kto nie lubi? A może jesteś
-        zawodowym łowcą najlepszych okazji? Z nami Twoje polowania mogą stać się
-        prostsze! Zarejestruj się w XXX, aby dostawać powiadomienia za każdym
-        razem, kiedy cena wymarzonego produktu spadnie. Śledź ulubione sklepy,
-        okazje i akcje, które przygotowujemy! Jeśli chcesz dołączyć do naszego
-        programu, wystarczy kilka prostych kroków:
+      Do you like saving money? Well, who doesn’t? Maybe you are a professional discount hunter? With us, your hunts will always be easier! Register on our website to receive a notification each time price of your dreamed product drops. Follow your favorite stores, sales and campaigns we prepare for you.
+Sounds cool? It is! All you have to do is follow few simple steps:
         <ul style={{ margin: "30px" }}>
           <li style={{ margin: "30px" }}>
-            1. Zarejestruj się na naszej stronie
+            1. Register on our site (register zrob pogrubione takie I podlinkowane)
           </li>
           <li style={{ margin: "30px" }}>
-            2. Skopiuj link do wybranego produktu
+            2. Copy link to your desired product
           </li>
-          <li style={{ margin: "30px" }}>3. Wklej link w wyszukiwarce</li>
+          <li style={{ margin: "30px" }}>3. Save your link in our search bar</li>
           <li style={{ margin: "30px" }}>
-            4. Poczekaj na powiadomomienie o spadku ceny
+            4. Get a notification from us when price drops.
           </li>
           <li style={{ margin: "30px" }}>
-            5. Ciesz się zaoszczędzonymi pieniędzmi!
+            5. Be happy with your new goods and saved money!
           </li>
         </ul>
       </Text>

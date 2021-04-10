@@ -5,25 +5,37 @@ import { RegisterComponent } from "./components/register/register-component";
 import { HeaderComponent } from "./components/header/header-component";
 import { AboutComponent } from "./components/dashboard/about-component";
 import AccountPage from "./components/account/account-page";
-import MembersDashboard from "./components/members/members-dashboard";
+import NotFound from "./components/notFound/not-found"
+// import MembersDashboard from "./components/members/members-dashboard";
 
 import { bodyStyle } from "./styles";
 import { Reset } from "styled-reset";
 import { AuthProvider } from "./Auth";
 import PrivateRoute from "./PrivateRoute";
 import { Box, Text } from "grommet";
+import Loadable from 'react-loadable';
 
+function Loading({ error, pastDelay }) {
+  if (error) {
+    return 'Oh nooess!';
+  } else {
+    return pastDelay ? <h3>Loading...</h3> : <h2>NOT LOADING</h2>;
+  }
+}
+
+const MembersDashboard = Loadable({
+  loader: () => import("./components/members/members-dashboard"),
+  loading: Loading,
+  delay: 2
+});
 
 function App() {
   return (
     <>
       <Reset />
       <AuthProvider>
-        {/* <div className="App" style={bodyStyle}> */}
         <Box fill style={bodyStyle}>
-          {/* <header className="App-header"> */}
-            <HeaderComponent></HeaderComponent>
-          {/* </header> */}
+          <HeaderComponent></HeaderComponent>
           <HashRouter>
             <Switch>
               <Route exact path="/">
@@ -35,12 +47,16 @@ function App() {
               <Route path="/login">
                 <LoginComponent />
               </Route>
-              <PrivateRoute component={MembersDashboard} path="/members" exact />
+              <PrivateRoute
+                component={MembersDashboard}
+                path="/members"
+                exact
+              />
               <PrivateRoute component={AccountPage} path="/account" exact />
+              <Route path="*" component={NotFound} />
             </Switch>
           </HashRouter>
-          </Box>
-        {/* </div> */}
+        </Box>
       </AuthProvider>
     </>
   );

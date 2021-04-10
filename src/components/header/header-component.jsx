@@ -1,10 +1,11 @@
 import React, {useContext, useCallback} from "react";
-import { Grommet, Header, Anchor, Box, ResponsiveContext, Menu } from "grommet";
+import { Grommet, Header, Anchor, Box, ResponsiveContext, Menu, Avatar, Image } from "grommet";
 import { Menu as MenuIcon } from "grommet-icons";
 import { headerStyle, customFocus } from "../../styles";
 import { AuthContext } from "../../Auth";
 import app from "./../../base";
 import { Redirect } from "react-router";
+import unicorn from './avatar.png'
 
 
 export const HeaderComponent = ({ history}) => {
@@ -38,7 +39,10 @@ export const HeaderComponent = ({ history}) => {
         height="xsmall"
         style={headerStyle}
       >
+                <Avatar src={unicorn} style={{width: '200px', height: '150px'}}></Avatar>
+
         <Anchor href={currentUser === null ? '/#' : '/#/members'} label="You will never miss any sale with us!" />
+        <Avatar src={unicorn} style={{width: '200px', height: '150px'}}></Avatar>
         <ResponsiveContext.Consumer>
           {(size) =>
             size === "small" ? (

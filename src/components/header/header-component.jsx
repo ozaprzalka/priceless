@@ -39,13 +39,14 @@ export const HeaderComponent = ({ history }) => {
   };
 
   return (
-    <Grommet theme={customFocus}>
+    <Grommet theme={customFocus} color= "#362C63">
 
       <Header
         background="light-4"
         pad="medium"
         height="small"
         style={headerStyle}
+        color= "#362C63"
       >
         <Anchor
           href={currentUser === null ? "/#" : "/#/members"}
@@ -58,7 +59,7 @@ export const HeaderComponent = ({ history }) => {
                 <Menu
                   a11yTitle="Navigation Menu"
                   dropProps={{ align: { top: "bottom", right: "right" } }}
-                  icon={<MenuIcon color="brand" />}
+                  icon={<MenuIcon color="#362C63" />}
                   items={[
                     {
                       label: (
@@ -92,7 +93,7 @@ export const HeaderComponent = ({ history }) => {
                   }}
                 ></Avatar>
 
-                <Box justify="end" direction="row" gap="medium">
+                <Box justify="end" direction="row" gap="medium" color= "#362C63">
                   <Anchor
                     href={currentUser === null ? "/#/login" : "/#/logout"}
                     label={currentUser === null ? "Login" : "Logout"}

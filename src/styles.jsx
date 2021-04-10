@@ -55,21 +55,22 @@ const customFocus = deepMerge(customTheme, {
 const bodyStyle = {
 
   // fontFamily: 'Parisienne, cursive',
-  backgroundColor: '#2f3541',
+  background: "linear-gradient(102.77deg, #2D00F7-9.18%, #F20089 209.09%)",
   width: '100vw',
   height: '100%',
-  color: '#D4DFE6',
+  color: '#362C63',
 }
 
 const headerStyle = {
   fontFamily: 'Kalam, cursive',
   backgroundColor: 'white',
-  fontSize: '30px'
+  fontSize: '30px',
+  color: "#362C63"
 }
 
 const smallHeaderStyle = {
   fontFamily: 'Kalam, cursive',
-  color: '#601cff',
+  color: '#362C63',
   padding: '5% 0',
 }
 
@@ -95,7 +96,7 @@ const loginStyle = {
 
 const cardStyle = {
   backgroundColor: '#DADADA',
-  color: '#601cff',
+  color: '#362C63',
   padding: '5% 0',
 }
 
@@ -116,7 +117,6 @@ const boxStyle = {
   minHeight: '250px',
   textTransform: 'uppercase',
   fontWeight: 'bold',
-  backgroundColor: '#2f3541',
   margin: '10% 0',
   color: '#D4DFE6',
 }

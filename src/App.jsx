@@ -29,12 +29,14 @@ const MembersDashboard = Loadable({
   delay: 2
 });
 
+const bgr = `linear-gradient(90deg, hsla(251, 100%, 48%, 1) 0%, hsla(266, 100%, 48%, 1) 0.1%, hsla(274, 100%, 47%, 1) 0.2%, hsla(280, 100%, 47%, 1) 0.3%, hsla(286, 100%, 45%, 1) 0.4%, hsla(291, 100%, 43%, 1) 0.5%, hsla(300, 100%, 41%, 1) 8.6%, hsla(310, 100%, 43%, 1) 7.7%, hsla(317, 100%, 45%, 1) 5.8%, hsla(326, 100%, 47%, 1) 0.9%)`
+
 function App() {
   return (
     <>
       <Reset />
       <AuthProvider>
-        <Box fill style={bodyStyle}>
+        <Box fill style={bodyStyle} background='linear-gradient(90deg, rgba(45,0,247,1) 12%, rgba(177,0,232,1) 59%, rgba(242,0,137,1) 100%)'>
           <HeaderComponent></HeaderComponent>
           <HashRouter>
             <Switch>

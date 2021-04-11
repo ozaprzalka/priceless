@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../Auth";
+import { boxStyle } from "../../styles";
+import { Checkbox, CheckboxSelected } from 'grommet-icons';
 
 
 import { Box, Text } from "grommet";
@@ -16,10 +18,10 @@ const AccountPage = () => {
   }
 
   return (
-        <Box fill align="center" justify="center">
-      <Box>
-        <Text>your email: {currentUser.email}</Text>
-        <Text> your username: {currentUser.displayName}</Text>
+        <Box fill align="center" justify="center" style={boxStyle}>
+      <Box border={{ color: 'brand', size: 'medium' }} pad='xlarge' style={{boxShadow: '2px 2px 17px 10px magenta'}}>
+        <Text>email: {currentUser.email}</Text>
+        <Text> username: {currentUser.displayName}</Text>
         <Text>{console.log(currentUser)}</Text>
       </Box>
     </Box>

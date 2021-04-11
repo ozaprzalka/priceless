@@ -14,7 +14,7 @@ import { headerStyle, smallHeaderStyle, customFocus } from "../../styles";
 import { AuthContext } from "../../Auth";
 import app from "./../../base";
 import { Redirect } from "react-router";
-import unicorn from "./avatar4.jpg";
+import unicorn from "./avatar7.png";
 
 export const HeaderComponent = ({ history }) => {
   const { currentUser } = useContext(AuthContext);
@@ -39,18 +39,18 @@ export const HeaderComponent = ({ history }) => {
   };
 
   return (
-    <Grommet theme={customFocus} color= "#362C63">
+    <Grommet theme={customFocus} >
 
       <Header
-        background="light-4"
+        background="#e0d1f9"
         pad="medium"
         height="small"
         style={headerStyle}
         color= "#362C63"
       >
-        <Anchor
+        <Anchor alignSelf="end"
           href={currentUser === null ? "/#" : "/#/members"}
-          label="You will never miss any sale with us!"
+          label="Save with us!"
         />
         <ResponsiveContext.Consumer style={smallHeaderStyle}>
           {(size) =>
@@ -85,15 +85,15 @@ export const HeaderComponent = ({ history }) => {
                       <Avatar 
                   src={unicorn}
                   style={{
-                    width: "400px",
-                    height: "190px",
+                    width: "320px",
+                    height: "150px",
                     borderRadius: "20px",
                     padding: "0 150px",
-                    marginRight: "170px",
+                    marginRight: "130px",
                   }}
                 ></Avatar>
 
-                <Box justify="end" direction="row" gap="medium" color= "#362C63">
+                <Box justify="end" alignSelf="end" direction="row" gap="medium" color= "#362C63">
                   <Anchor
                     href={currentUser === null ? "/#/login" : "/#/logout"}
                     label={currentUser === null ? "Login" : "Logout"}

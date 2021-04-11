@@ -90,7 +90,7 @@ const MembersDashboard = () => {
     <>
       <Box align="center" justify="center" style={boxStyle} onLoad={getLinks}>
         <Card width="large">
-          <CardBody className="card_body" style={cardStyle} overflow="auto">
+          <CardBody className="card_body" style={cardStyle} overflow="auto" background="#e0d1f9" >
             <Box align="center">
               <Text size="large" text-align="center" weight="bold">
                 Your saved links

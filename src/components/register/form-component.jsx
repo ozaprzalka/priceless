@@ -43,7 +43,7 @@ const RegisterForm = ({ history }) => {
   };
 
   return (
-    <Box fill align="center" justify="center" style={formStyle}>
+    <Box fill align="center" justify="center" style={formStyle} pad="xlarge">
       <Box width="medium">
         <Form
           validate="change"

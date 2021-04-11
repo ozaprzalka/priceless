@@ -7,7 +7,7 @@ import { customTheme } from "./styles";
 
 
 ReactDOM.render(
-  <Grommet theme={customTheme} full>
+  <Grommet full theme={customTheme}  style={{height: '100%'}} >
     <App/>
     </Grommet>,
   document.getElementById('root')

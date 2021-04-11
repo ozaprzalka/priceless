@@ -41,7 +41,7 @@ const LoginForm = ({ history }) => {
             onChange={(nextValue) => setValue(nextValue)}
             onSubmit={handleLogin}
           >
-            <FormField name="username" label="Username" required>
+            <FormField name="username" label="email" required>
               <TextInput type="username" name="username" />
             </FormField>
             <FormField

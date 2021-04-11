@@ -10,6 +10,8 @@ export const customTheme = deepFreeze(
       "focus": "#8548e7",
       "placeholder": "#ede4fc",
       "white": "#EDEDED",
+      "dark-1": "#2f3541",
+      "light-6": "#333333",
       "accent-1": "#FD6FFF",
       "accent-2": "#bb99f2",
       "accent-3": "#894ee8",
@@ -40,6 +42,8 @@ export const customTheme = deepFreeze(
   }
 }
 )
+
+
       
 const customFocus = deepMerge(customTheme, {
   global: {
@@ -54,18 +58,19 @@ const customFocus = deepMerge(customTheme, {
 
 const bodyStyle = {
 
-  // fontFamily: 'Parisienne, cursive',
+  fontFamily: 'Quicksand, sans-serif',
   background: "linear-gradient(102.77deg, #2D00F7-9.18%, #F20089 209.09%)",
   width: '100vw',
-  height: '100%',
+  minHeight: '100%',
   color: '#362C63',
+
 }
 
 const headerStyle = {
   fontFamily: 'Kalam, cursive',
-  backgroundColor: 'white',
+  backgroundImage: "url('src/components/header/test.jpeg')",
   fontSize: '30px',
-  color: "#362C63"
+  color: "#362C63",
 }
 
 const smallHeaderStyle = {
@@ -78,14 +83,16 @@ const formStyle = {
   textTransform: 'uppercase',
   fontWeight: 'bold',
   backgroundColor: '#2f3541',
-  margin: '10% 0',
+  margin: '10% 30%',
   color: '#D4DFE6',
+  maxWidth: '50%'
 }
 
 const aboutStyle = {
   margin: '10% 20%',
   color: '#D4DFE6',
-  height: '100%'
+  height: '100%',
+  textTransform: 'capitalize'
 }
 
 const loginStyle = {
@@ -95,7 +102,7 @@ const loginStyle = {
 }
 
 const cardStyle = {
-  backgroundColor: '#DADADA',
+  // backgroundColor: '#DADADA',
   color: '#362C63',
   padding: '5% 0',
 }
@@ -115,11 +122,13 @@ const buttonStyle = {
 
 const boxStyle = {
   minHeight: '250px',
-  textTransform: 'uppercase',
+  // textTransform: 'uppercase',
   fontWeight: 'bold',
   margin: '10% 0',
   color: '#D4DFE6',
 }
+
+
 
 export {
   bodyStyle,

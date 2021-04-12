@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Auth";
 import { database } from "../../base";
-import { boxStyle, cardStyle, inputStyle, buttonStyle } from "../../styles";
+import { boxStyle, cardStyle, inputStyle, buttonStyle, formStyle } from "../../styles";
 import { withRouter } from "react-router";
 
 import {
@@ -88,9 +88,9 @@ const MembersDashboard = () => {
 
   return (
     <>
-      <Box align="center" justify="center" style={boxStyle} onLoad={getLinks}>
+      <Box round="xsmall" align="center" justify="center" style={formStyle} onLoad={getLinks}>
         <Card width="large">
-          <CardBody className="card_body" style={cardStyle} overflow="auto" background="#e0d1f9" >
+          <CardBody className="card_body" style={cardStyle} overflow="auto" >
             <Box align="center">
               <Text size="large" text-align="center" weight="bold">
                 Your saved links
@@ -100,10 +100,9 @@ const MembersDashboard = () => {
                   width="medium"
                   style={inputStyle}
                   value={link}
-                  placeholder="paste url here"
                   onChange={handleChange}
                 >
-                  <TextInput></TextInput>
+                  <TextInput placeholder="place your link here"></TextInput>
                 </FormField>
                 <Box width="medium" direction="row">
                   <Button

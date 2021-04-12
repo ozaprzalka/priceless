@@ -16,7 +16,7 @@ import app from "./../../base";
 import { Redirect } from "react-router";
 import unicorn from "./avatar7.png";
 
-export const HeaderComponent = ({ history }) => {
+export const HeaderComponent = () => {
   const { currentUser } = useContext(AuthContext);
 
   const handleLogout = useCallback(
@@ -25,13 +25,12 @@ export const HeaderComponent = ({ history }) => {
       try {
         app.auth().signOut();
         console.log("out");
-        history.push("/login");
       } catch (err) {
         console.log(err);
       }
       return <Redirect to="/login" />;
     },
-    [history]
+    []
   );
 
   const handleLogin = () => {
@@ -42,7 +41,7 @@ export const HeaderComponent = ({ history }) => {
     <Grommet theme={customFocus} >
 
       <Header
-        background="#e0d1f9"
+        background="#A593E0"
         pad="medium"
         height="small"
         style={headerStyle}

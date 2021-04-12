@@ -11,6 +11,7 @@ export const customTheme = deepFreeze(
       "placeholder": "#ede4fc",
       "white": "#EDEDED",
       "dark-1": "#2f3541",
+      "dark-3": "#566270",
       "light-6": "#333333",
       "accent-1": "#FD6FFF",
       "accent-2": "#bb99f2",
@@ -39,6 +40,14 @@ export const customTheme = deepFreeze(
       "vertical": "12px",
       "horizontal": "28px"
     }
+  },
+  "formField": {
+    "border": {
+      "color": "brand",
+      "style": "hidden",
+      "background": "white"
+    }
+
   }
 }
 )
@@ -82,10 +91,11 @@ const smallHeaderStyle = {
 const formStyle = {
   textTransform: 'uppercase',
   fontWeight: 'bold',
-  backgroundColor: '#2f3541',
+  backgroundColor: '#A593E0',
   margin: '10% 30%',
-  color: '#D4DFE6',
-  maxWidth: '50%'
+  color: '#601cff',
+  maxWidth: '50%',
+  boxShadow: '2px 2px 17px 10px magenta'
 }
 
 const aboutStyle = {
@@ -102,21 +112,19 @@ const loginStyle = {
 }
 
 const cardStyle = {
-  // backgroundColor: '#DADADA',
-  color: '#362C63',
   padding: '5% 0',
 }
 
 const inputStyle = {
   backgroundColor: 'white',
-  border: '1px solid #601cff',
+  border: '2px solid magenta',
   margin: '10px 0',
   borderRadius: '10px'
 }
 
 const buttonStyle = {
   padding: '2px 10px',
-  margin: '2px 5px',
+  margin: '5px',
   textTransform: 'uppercase'
 }
 
@@ -124,8 +132,18 @@ const boxStyle = {
   minHeight: '250px',
   // textTransform: 'uppercase',
   fontWeight: 'bold',
-  margin: '10% 0',
+  margin: '8% 0',
   color: '#D4DFE6',
+}
+
+const accountStyle = {
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+    backgroundColor: '#A593E0',
+    margin: '2% 10%',
+    color: '#601cff',
+    maxWidth: '50%',
+    boxShadow: '2px 2px 17px 10px magenta'
 }
 
 
@@ -141,7 +159,8 @@ export {
   cardStyle,
   inputStyle,
   buttonStyle,
-  boxStyle
+  boxStyle,
+  accountStyle
 }
 
 

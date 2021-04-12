@@ -2,37 +2,33 @@ import React, { useEffect, useState, useContext } from "react";
 import app from "./base.js";
 
 export const AuthContext = React.createContext(
-  // currentUser: null,
-  // setCurrentUser: () => {}
 );
-
-// const stateSwitch =  () => {
-// const {currentUser, setCurrentUser} = useContext(AuthContext)
-// }
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  // let { currentUser } = useContext(AuthContext);
-  // const [pending, setPending] = useState(true);
+  const [pending, setPending] = useState(true);
+
   useEffect(() => {
     console.log('auth provider')
     if (currentUser) {
       return
     }
     console.log('auth provider 2')
+    const listen = app.auth()
+    .onAuthStateChanged(
+      (user) => {
+        setCurrentUser(user);
+        console.log('from auth', user ? user.uid : null)
+        setPending(false);
+      });
+    return listen;
+  }, []);
 
-    app.auth().onAuthStateChanged((user) => {
-        if (user) {
-            setCurrentUser(user)
-            // setPending(false)
-            console.log('pending')
-            console.log('from auth', user.uid)
-        } else {
-            setCurrentUser(null)
-        }
-    });
-  }, [currentUser]);
-
+  if (pending) {
+    return (
+      <div>Loading, please wait..</div>
+    )
+  }
   return (
     <AuthContext.Provider
       value={{

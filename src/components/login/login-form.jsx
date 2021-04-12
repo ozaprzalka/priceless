@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { Box, Button, Form, FormField, TextInput } from "grommet";
-import { formStyle, loginStyle } from "../../styles";
+import { formStyle, loginStyle, inputStyle } from "../../styles";
 import app from "../../base";
 import { withRouter } from "react-router";
 
@@ -31,9 +31,9 @@ const LoginForm = ({ history }) => {
 
   return (
     <>
-      <Box align="center" justify="center" pad="xlarge" style={formStyle}>
+      <Box round="xsmall" align="center" justify="center" pad="xlarge" style={formStyle}>
         <Box style={loginStyle}>{error}</Box>
-        <Box width="large">
+        <Box width="xlarge">
           <Form
             align="center"
             value={value}
@@ -42,7 +42,7 @@ const LoginForm = ({ history }) => {
             onSubmit={handleLogin}
           >
             <FormField name="username" label="email" required>
-              <TextInput type="username" name="username" />
+              <TextInput style={inputStyle} type="username" name="username" />
             </FormField>
             <FormField
               name="password"
@@ -50,7 +50,7 @@ const LoginForm = ({ history }) => {
               type="password"
               required
             >
-              <TextInput type="password" name="password" />
+              <TextInput style={inputStyle} type="password" name="password" />
             </FormField>
             <Button size="large" type="submit" label="LOGIN" primary />
           </Form>

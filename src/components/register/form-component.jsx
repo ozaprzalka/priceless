@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { formStyle } from "../../styles";
+import { formStyle, inputStyle } from "../../styles";
 import { Box, Button, Form, FormField, TextInput } from "grommet";
 import { withRouter } from "react-router";
 import app from "../../base";
@@ -28,6 +28,7 @@ const RegisterForm = ({ history }) => {
           email: e.value.email,
           password: e.value.password,
           uid: loggedIn.uid,
+          created: loggedIn.metadata.lastSignInTime,
         };
         database.collection("users").doc(user.uid).set(user);
       })
@@ -43,9 +44,10 @@ const RegisterForm = ({ history }) => {
   };
 
   return (
-    <Box fill align="center" justify="center" style={formStyle} pad="xlarge">
-      <Box width="medium">
-        <Form
+    <Box round="xsmall" align="center" justify="center" style={formStyle} pad="xlarge">
+      <Box width="large">
+        <Form style={{marginTop: "20px"}}
+        align="center"
           validate="change"
           onSubmit={handleSignup}
           onValidate={(validationResults) => {
@@ -62,7 +64,7 @@ const RegisterForm = ({ history }) => {
             required
             validate={[{ regexp: /[a-zA-Z][a-zA-Z0-9-_]{2,16}$/ }]}
           >
-            <TextInput name="name" type="name" />
+            <TextInput style={inputStyle} name="name" type="name" />
           </FormField>
 
           <FormField
@@ -73,7 +75,7 @@ const RegisterForm = ({ history }) => {
               { regexp: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ },
             ]}
           >
-            <TextInput name="email" type="email" />
+            <TextInput style={inputStyle} name="email" type="email" />
           </FormField>
 
           <FormField
@@ -86,12 +88,13 @@ const RegisterForm = ({ history }) => {
               },
             ]}
           >
-            <TextInput name="password" type="password" />
+            <TextInput style={inputStyle} name="password" type="password" />
           </FormField>
 
           <FormField
             label="Confirm Password"
             name="confirmPassword"
+            info="Password must be at least 6 characters, contain a letter, number and special character"
             required
             validate={[
               (confirmPassword) => {
@@ -101,7 +104,7 @@ const RegisterForm = ({ history }) => {
               },
             ]}
           >
-            <TextInput name="confirmPassword" type="password" />
+            <TextInput style={inputStyle} name="confirmPassword" type="password" />
           </FormField>
 
           <Box direction="row" justify="between" margin={{ top: "medium" }}>

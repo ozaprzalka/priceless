@@ -146,7 +146,13 @@ const accountStyle = {
     boxShadow: '2px 2px 17px 10px magenta'
 }
 
-
+const loadingStyle = {
+  width: '100%',
+  height: '100%',
+  backgroundColor: '#A593E0',
+  justifyContent: 'center',
+  alignItems: 'center'
+}
 
 export {
   bodyStyle,
@@ -160,7 +166,8 @@ export {
   inputStyle,
   buttonStyle,
   boxStyle,
-  accountStyle
+  accountStyle,
+  loadingStyle,
 }
 
 

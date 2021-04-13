@@ -4,6 +4,8 @@ import { boxStyle, accountStyle, inputStyle, buttonStyle } from "../../styles";
 import { Checkbox, CheckboxSelected } from "grommet-icons";
 import { database } from "../../base";
 import { useHistory } from "react-router";
+import app from "./../../base";
+import firebase from "firebase/app";
 
 import {
   Box,
@@ -46,9 +48,9 @@ const AccountPage = () => {
   useEffect(() => {
     const setusr = document.get().then((snapshot) => {
       setUserDetails(snapshot.data());
-      console.log('1 render')
+      console.log("1 render");
     });
-    console.log('2 render')
+    console.log("2 render");
     return setusr;
   }, []);
 
@@ -66,6 +68,26 @@ const AccountPage = () => {
       })
       .catch(function (err) {
         console.log(err);
+      });
+  };
+
+  const authenticate = () => {
+    let credential = userDetails.password;
+    console.log("creds", credential);
+    let providerData = app.auth().currentUser?.providerData;
+    console.log("provider", providerData);
+    console.log(`user is signed in with ${providerData[0].providerId}`);
+    let credentials = firebase.auth.EmailAuthProvider.credential(
+      userDetails.email,
+      credential
+    );
+    currentUser
+      .reauthenticateWithCredential(credentials)
+      .then(function () {
+        console.log("authenticated");
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   };
 
@@ -140,6 +162,24 @@ const AccountPage = () => {
             >
               <TextInput placeholder="type your new username here"></TextInput>
             </FormField>
+            <Box width="medium" direction="row">
+              <Button type="submit" align="center" primary style={buttonStyle}>
+                submit
+              </Button>
+            </Box>
+          </Form>
+        </Box>
+        <Box
+          border={{ color: "brand", size: "medium" }}
+          pad="xlarge"
+          gap="medium"
+          round="xsmall"
+          style={accountStyle}
+        >
+          <Heading level="3" size="30px" margin="0 0 15px 0">
+            Change your password
+          </Heading>
+          <Form onSubmit={authenticate}>
             <Box width="medium" direction="row">
               <Button type="submit" align="center" primary style={buttonStyle}>
                 submit

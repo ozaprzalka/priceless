@@ -39,6 +39,11 @@ export const customTheme = deepFreeze(
     "padding": {
       "vertical": "12px",
       "horizontal": "28px"
+    },
+    "border": {
+      "width": "1px",
+      "color": "brand",
+
     }
   },
   "formField": {
@@ -77,15 +82,14 @@ const bodyStyle = {
 
 const headerStyle = {
   fontFamily: 'Kalam, cursive',
-  backgroundImage: "url('src/components/header/test.jpeg')",
   fontSize: '30px',
   color: "#362C63",
 }
 
 const smallHeaderStyle = {
   fontFamily: 'Kalam, cursive',
-  color: '#362C63',
-  padding: '5% 0',
+  color: '#601cff',
+  padding: '10px 30px'
 }
 
 const formStyle = {
@@ -95,7 +99,39 @@ const formStyle = {
   margin: '10% 30%',
   color: '#601cff',
   maxWidth: '50%',
-  boxShadow: '2px 2px 17px 10px magenta'
+  boxShadow: '2px 2px 17px 10px magenta',
+
+}
+
+const smallLoginStyle = {
+  textTransform: 'uppercase',
+  fontWeight: 'bold',
+  backgroundColor: '#A593E0',
+  margin: '40% 10%',
+  color: '#601cff',
+  minWidth: '50%',
+  boxShadow: '2px 2px 17px 10px magenta',
+  padding: '50px 0'
+}
+
+const smallFormStyle = {
+  textTransform: 'uppercase',
+  fontWeight: 'bold',
+  backgroundColor: '#A593E0',
+  margin: '20% 10%',
+  color: '#601cff',
+  minWidth: '80%',
+  boxShadow: '2px 2px 17px 10px magenta',
+  minHeight: '510px',
+}
+
+const smallLMemStyle = {
+  textTransform: 'uppercase',
+  fontWeight: 'bold',
+  margin: '20% 10%',
+  color: '#601cff',
+  minWidth: '80%',
+  minHeight: '570px',
 }
 
 const aboutStyle = {
@@ -128,9 +164,14 @@ const buttonStyle = {
   textTransform: 'uppercase'
 }
 
+const largeButtonStyle = {
+  padding: '12px 25px',
+  margin: '15px',
+  textTransform: 'uppercase'
+}
+
 const boxStyle = {
-  minHeight: '250px',
-  // textTransform: 'uppercase',
+  minHeight: '660px',
   fontWeight: 'bold',
   margin: '8% 0',
   color: '#D4DFE6',
@@ -143,7 +184,25 @@ const accountStyle = {
     margin: '2% 10%',
     color: '#601cff',
     maxWidth: '50%',
+    minHeight: '280px',
     boxShadow: '2px 2px 17px 10px magenta'
+}
+
+const smallAccountStyle = {
+  textTransform: 'uppercase',
+  backgroundColor: '#A593E0',
+  margin: '2% 50%',
+  color: '#601cff',
+  minWidth: '85%',
+  boxShadow: '2px 2px 17px 10px magenta'
+}
+
+const smallCardStyle = {
+  backgroundColor: '#A593E0',
+  padding: '20px 10px',
+  color: '#601cff',
+  minWidth: '85%',
+  boxShadow: '2px 2px 17px 10px magenta'
 }
 
 const loadingStyle = {
@@ -168,7 +227,10 @@ export {
   boxStyle,
   accountStyle,
   loadingStyle,
+  smallAccountStyle,
+  smallCardStyle,
+  smallFormStyle,
+  smallLoginStyle,
+  smallLMemStyle,
+  largeButtonStyle
 }
-
-
-

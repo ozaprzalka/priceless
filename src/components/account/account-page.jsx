@@ -1,6 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Auth";
-import { boxStyle, accountStyle, inputStyle, buttonStyle } from "../../styles";
+import {
+  boxStyle,
+  accountStyle,
+  inputStyle,
+  buttonStyle,
+  smallAccountStyle,
+  largeButtonStyle
+} from "../../styles";
 import { Checkbox, CheckboxSelected } from "grommet-icons";
 import { database } from "../../base";
 import { useHistory } from "react-router";
@@ -15,6 +22,7 @@ import {
   FormField,
   TextInput,
   Button,
+  ResponsiveContext,
 } from "grommet";
 
 const AccountPage = () => {
@@ -23,15 +31,11 @@ const AccountPage = () => {
   const [username, setusername] = useState("");
   const history = useHistory();
   const document = database.collection("users").doc(currentUser.uid);
-  let usr = document.get("name");
   const [userDetails, setUserDetails] = useState("");
 
   const getUsername = () => {
     document.onSnapshot((doc) => {
       let data = doc.data();
-      // Object.keys(data).forEach(name => {
-      //   console.log(name, data[name])
-      // })
       if (data["name"]) {
         console.log(data["name"]);
         return data["name"];
@@ -39,11 +43,11 @@ const AccountPage = () => {
     });
   };
 
-  const getName = () => {
-    document.get().then((snapshot) => {
-      setUserDetails(snapshot.data());
-    });
-  };
+  // const getName = () => {
+  //   document.get().then((snapshot) => {
+  //     setUserDetails(snapshot.data());
+  //   });
+  // };
 
   useEffect(() => {
     const setusr = document.get().then((snapshot) => {
@@ -52,7 +56,7 @@ const AccountPage = () => {
     });
     console.log("2 render");
     return setusr;
-  }, []);
+  }, []); //eslint-disable-line
 
   const handleChangeUsername = (e) => {
     e.preventDefault();
@@ -93,7 +97,6 @@ const AccountPage = () => {
 
   const changeUsername = () => {
     const newName = username;
-    // const document = database.collection("users").doc(currentUser.uid)
     currentUser
       .updateProfile({
         displayName: newName,
@@ -126,68 +129,154 @@ const AccountPage = () => {
 
   return (
     <>
-      <Box fill align="center" justify="center" style={boxStyle}>
-        <Box
-          border={{ color: "brand", size: "medium" }}
-          pad="xlarge"
-          gap="medium"
-          round="xsmall"
-          style={accountStyle}
-        >
-          <Heading level="1" size="37px" margin="0 0 30px 0">
-            Your account info
-          </Heading>
-          <Text>email: {currentUser.email}</Text>
-          <Text> username: {userDetails.name}</Text>
-          <Text>created: {currentUser.metadata.lastSignInTime}</Text>
-          <Text>{console.log(currentUser)}</Text>
-          <Text>{console.log(userDetails)}</Text>
-        </Box>
-        <Box
-          border={{ color: "brand", size: "medium" }}
-          pad="xlarge"
-          gap="medium"
-          round="xsmall"
-          style={accountStyle}
-        >
-          <Heading level="2" size="30px" margin="0 0 15px 0">
-            Change your username
-          </Heading>
-          <Form onSubmit={changeUsername}>
-            <FormField
-              width="medium"
-              style={inputStyle}
-              value={username}
-              onChange={handleChangeUsername}
-            >
-              <TextInput placeholder="type your new username here"></TextInput>
-            </FormField>
-            <Box width="medium" direction="row">
-              <Button type="submit" align="center" primary style={buttonStyle}>
-                submit
-              </Button>
+      <ResponsiveContext.Consumer>
+        {(size) =>
+          size === "small" ? (
+            <Box fill align="center" justify="center" style={boxStyle}>
+              <Box
+                border={{ color: "brand", size: { size } }}
+                pad={size}
+                gap={size}
+                round="xsmall"
+                style={smallAccountStyle}
+              >
+                <Heading level="1" size="small" margin="0 0 10px 10px">
+                  Your account info
+                </Heading>
+                <Text>email: {currentUser.email}</Text>
+                <Text> username: {userDetails.name}</Text>
+                <Text>created: {currentUser.metadata.lastSignInTime}</Text>
+                <Text>{console.log(currentUser)}</Text>
+                <Text>{console.log(userDetails)}</Text>
+              </Box>
+              <Box
+                border={{ color: "brand", size: { size } }}
+                pad={size}
+                gap={size}
+                round="xsmall"
+                style={smallAccountStyle}
+              >
+                <Heading level="2" size={size} margin="0 0 10px 10px">
+                  Change your username
+                </Heading>
+                <Form onSubmit={changeUsername}>
+                  <FormField
+                    width="100%"
+                    style={inputStyle}
+                    value={username}
+                    onChange={handleChangeUsername}
+                  >
+                    <TextInput placeholder="type a new username here"></TextInput>
+                  </FormField>
+                  <Box direction="row" justify="center">
+                    <Button
+                      type="submit"
+                      align="center"
+                      primary
+                      style={buttonStyle}
+                    >
+                      submit
+                    </Button>
+                  </Box>
+                </Form>
+              </Box>
+              <Box
+                border={{ color: "brand", size: { size } }}
+                pad={size}
+                gap={size}
+                round="xsmall"
+                style={smallAccountStyle}
+                align="center"
+                justify="center"
+              >
+                <Heading level="3" size={size} margin="0 0 10px 0">
+                  Change your password
+                </Heading>
+                <Form onSubmit={authenticate}>
+                  <Box direction="row" justify="center">
+                    <Button type="submit" primary style={buttonStyle}>
+                      change
+                    </Button>
+                  </Box>
+                </Form>
+              </Box>
             </Box>
-          </Form>
-        </Box>
-        <Box
-          border={{ color: "brand", size: "medium" }}
-          pad="xlarge"
-          gap="medium"
-          round="xsmall"
-          style={accountStyle}
-        >
-          <Heading level="3" size="30px" margin="0 0 15px 0">
-            Change your password
-          </Heading>
-          <Form onSubmit={authenticate}>
-            <Box width="medium" direction="row">
-              <Button type="submit" align="center" primary style={buttonStyle}>
-                submit
-              </Button>
+          ) : (
+            <Box fill align="center" justify="center" style={boxStyle}>
+              <Box
+                border={{ color: "brand", size: "medium" }}
+                pad="xlarge"
+                gap="medium"
+                round="xsmall"
+                style={accountStyle}
+              >
+                <Heading level="1" size="37px" margin="0 0 30px 0">
+                  Your account info
+                </Heading>
+                <Text>email: {currentUser.email}</Text>
+                <Text> username: {userDetails.name}</Text>
+                <Text>created: {currentUser.metadata.lastSignInTime}</Text>
+                <Text>{console.log(currentUser)}</Text>
+                <Text>{console.log(userDetails)}</Text>
+              </Box>
+              <Box
+                border={{ color: "brand", size: "medium" }}
+                pad="xlarge"
+                gap="medium"
+                round="xsmall"
+                style={accountStyle}
+              >
+                <Heading level="2" size="30px" margin="0 0 15px 0">
+                  Change your username
+                </Heading>
+                <Form onSubmit={changeUsername}>
+                  <FormField
+                    width="medium"
+                    style={inputStyle}
+                    value={username}
+                    onChange={handleChangeUsername}
+                  >
+                    <TextInput placeholder="type your new username here"></TextInput>
+                  </FormField>
+                  <Box width="medium" direction="row" justify="center">
+                    <Button
+                      type="submit"
+                      align="center"
+                      primary
+                      style={largeButtonStyle}
+                    >
+                      submit
+                    </Button>
+                  </Box>
+                </Form>
+              </Box>
+              <Box
+                border={{ color: "brand", size: "medium" }}
+                pad="xlarge"
+                gap="medium"
+                round="xsmall"
+                style={accountStyle}
+              >
+                <Heading level="3" size="30px" margin="0 0 15px 0">
+                  Change your password
+                </Heading>
+                <Form onSubmit={authenticate}>
+                  <Box width="medium" direction="row" justify="center">
+                    <Button
+                      type="submit"
+                      align="center"
+                      primary
+                      style={largeButtonStyle}
+                    >
+                      submit
+                    </Button>
+                  </Box>
+                </Form>
+              </Box>
             </Box>
-          </Form>
-        </Box>
-      </Box>
+          )
+        }
+      </ResponsiveContext.Consumer>
     </>
   );
 };

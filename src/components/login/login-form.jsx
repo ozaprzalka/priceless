@@ -1,6 +1,18 @@
 import React, { useState, useCallback } from "react";
-import { Box, Button, Form, FormField, TextInput } from "grommet";
-import { formStyle, loginStyle, inputStyle } from "../../styles";
+import {
+  Box,
+  Button,
+  Form,
+  FormField,
+  TextInput,
+  ResponsiveContext,
+} from "grommet";
+import {
+  formStyle,
+  loginStyle,
+  inputStyle,
+  smallLoginStyle,
+} from "../../styles";
 import app from "../../base";
 import { withRouter } from "react-router";
 
@@ -31,31 +43,90 @@ const LoginForm = ({ history }) => {
 
   return (
     <>
-      <Box round="xsmall" align="center" justify="center" pad="xlarge" style={formStyle}>
-        <Box style={loginStyle}>{error}</Box>
-        <Box width="xlarge">
-          <Form
-            align="center"
-            value={value}
-            validate="change"
-            onChange={(nextValue) => setValue(nextValue)}
-            onSubmit={handleLogin}
-          >
-            <FormField name="username" label="email" required>
-              <TextInput style={inputStyle} type="username" name="username" />
-            </FormField>
-            <FormField
-              name="password"
-              label="Password"
-              type="password"
-              required
+      <ResponsiveContext.Consumer>
+        {(size) =>
+          size === "small" ? (
+            <Box
+              round="xsmall"
+              align="center"
+              justify="center"
+              style={smallLoginStyle}
             >
-              <TextInput style={inputStyle} type="password" name="password" />
-            </FormField>
-            <Button size="large" type="submit" label="LOGIN" primary />
-          </Form>
-        </Box>
-      </Box>
+              <Box style={loginStyle}>{error}</Box>
+              <Box width="xlarge" pad="large">
+                <Form
+                  align="center"
+                  value={value}
+                  validate="change"
+                  onChange={(nextValue) => setValue(nextValue)}
+                  onSubmit={handleLogin}
+                >
+                  <FormField name="username" label="email" required>
+                    <TextInput
+                      style={inputStyle}
+                      type="username"
+                      name="username"
+                    />
+                  </FormField>
+                  <FormField
+                    name="password"
+                    label="Password"
+                    type="password"
+                    required
+                  >
+                    <TextInput
+                      style={inputStyle}
+                      type="password"
+                      name="password"
+                    />
+                  </FormField>
+                  <Button size="large" type="submit" label="LOGIN" primary />
+                </Form>
+              </Box>
+            </Box>
+          ) : (
+            <Box
+              round="xsmall"
+              align="center"
+              justify="center"
+              pad="xlarge"
+              style={formStyle}
+            >
+              <Box style={loginStyle}>{error}</Box>
+              <Box width="xlarge">
+                <Form
+                  align="center"
+                  value={value}
+                  validate="change"
+                  onChange={(nextValue) => setValue(nextValue)}
+                  onSubmit={handleLogin}
+                >
+                  <FormField name="username" label="email" required>
+                    <TextInput
+                      style={inputStyle}
+                      type="username"
+                      name="username"
+                    />
+                  </FormField>
+                  <FormField
+                    name="password"
+                    label="Password"
+                    type="password"
+                    required
+                  >
+                    <TextInput
+                      style={inputStyle}
+                      type="password"
+                      name="password"
+                    />
+                  </FormField>
+                  <Button size="large" type="submit" label="LOGIN" primary />
+                </Form>
+              </Box>
+            </Box>
+          )
+        }
+      </ResponsiveContext.Consumer>
     </>
   );
 };

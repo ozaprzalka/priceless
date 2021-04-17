@@ -1,8 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Auth";
 import { database } from "../../base";
-import { boxStyle, cardStyle, inputStyle, buttonStyle, formStyle } from "../../styles";
-import { withRouter } from "react-router";
+import {
+  cardStyle,
+  inputStyle,
+  buttonStyle,
+  formStyle,
+  smallLMemStyle,
+  smallCardStyle,
+  largeButtonStyle
+} from "../../styles";
 
 import {
   Box,
@@ -14,7 +21,11 @@ import {
   CardBody,
   Text,
   InfiniteScroll,
+  ResponsiveContext,
+  Heading,
 } from "grommet";
+
+const input = document.querySelector(".link-input");
 
 const MembersDashboard = () => {
   const { currentUser } = useContext(AuthContext);
@@ -39,14 +50,14 @@ const MembersDashboard = () => {
       links: [...links, link],
     };
     database.collection("links").doc(currentUser.uid).set(savedLink);
-    // if (currentUser && database.collection("links").doc(currentUser.uid)) {
-    //   database.collection("links").doc(currentUser.uid).update(savedLink);
-    // } else {
-    //   database.collection("links").doc(currentUser.uid).set(savedLink);
-    // }
+    input.value = "";
   };
 
   const handleChange = (e) => {
+    e.preventDefault();
+    setLink(e.target.value);
+  };
+  const handleNameChange = (e) => {
     e.preventDefault();
     setLink(e.target.value);
   };
@@ -66,79 +77,194 @@ const MembersDashboard = () => {
     }
   };
 
-  const getLinks1 = () => {
-    if (currentUser && database.collection("links").doc(currentUser.uid)) {
-      let myLinks = database.collection("links").doc(currentUser.uid);
-      myLinks.get().then((doc) => {
-        if (doc.exists) {
-          console.log("Doc data: " + doc.data());
-        } else {
-          console.log("Nie ma");
-        }
-      });
-    } else {
-      return;
-    }
-  };
-
   useEffect(() => {
     getLinks();
     return () => links;
-  }, []);
+  }, []); //eslint-disable-line
 
   return (
     <>
-      <Box round="xsmall" align="center" justify="center" style={formStyle} onLoad={getLinks}>
-        <Card width="large">
-          <CardBody className="card_body" style={cardStyle} overflow="auto" >
-            <Box align="center">
-              <Text size="large" text-align="center" weight="bold">
-                Your saved links
-              </Text>
-              <Form onSubmit={addLink}>
-                <FormField
-                  width="medium"
-                  style={inputStyle}
-                  value={link}
-                  onChange={handleChange}
-                >
-                  <TextInput placeholder="place your link here"></TextInput>
-                </FormField>
-                <Box width="medium" direction="row">
-                  <Button
-                    type="submit"
-                    align="center"
-                    primary
-                    style={buttonStyle}
-                  >
-                    Add new
-                  </Button>
-                  <Button
-                    type="submit"
-                    primary
-                    onClick={getLinks}
-                    style={buttonStyle}
-                  >
-                    Refresh
-                  </Button>
-                </Box>
-              </Form>
-              <InfiniteScroll items={links} step={100}>
-                {(link, index) => (
-                  <Box
-                    flex={false}
-                    pad="medium"
-                    key={index}
-                    border={{ side: "bottom" }}
-                  >
-                    <Text>{link}</Text>
+      <ResponsiveContext.Consumer>
+        {(size) =>
+          size === "small" ? (
+            <Box
+              round="xsmall"
+              align="center"
+              justify="center"
+              style={smallLMemStyle}
+              onLoad={getLinks}
+            >
+              <Card width="large" style={smallCardStyle}>
+                <CardBody className="card_body" overflow="auto">
+                  <Box align="center">
+                    <Heading level="1" size="small" margin="10px">
+                      Your saved links
+                    </Heading>
+                    <Form onSubmit={addLink}>
+                    <FormField
+                        style={inputStyle}
+                        value={link}
+                        onChange={handleNameChange}
+                      >
+                        <TextInput
+                          className="link-input"
+                          placeholder="place your name here"
+                        ></TextInput>
+                      </FormField>
+                      <FormField
+                        style={inputStyle}
+                        value={link}
+                        onChange={handleChange}
+                      >
+                        <TextInput
+                          className="link-input"
+                          placeholder="place your link here"
+                        ></TextInput>
+                      </FormField>
+                      <Box width="100%" direction="row">
+                        <Button
+                          type="submit"
+                          align="center"
+                          primary
+                          style={buttonStyle}
+                        >
+                          Add new
+                        </Button>
+                        <Button
+                          type="submit"
+                          primary
+                          onClick={getLinks}
+                          style={buttonStyle}
+                        >
+                          Refresh
+                        </Button>
+                      </Box>
+                    </Form>
+                    <InfiniteScroll items={links} step={100}>
+                      {(link, index) => (
+                        <Box
+                          direction="column"
+                          flex={false}
+                          pad={size}
+                          key={index}
+                          border={{ side: "bottom" }}
+                        >
+                          <Box
+                            direction="row"
+                            align="center"
+                            justify="between"
+                            alignContent="center"
+                            width={{ min: "70vw", max: "90vw" }}
+                          >
+                            <Text>{link}</Text>
+                            <Button
+                              type="submit"
+                              onClick={getLinks}
+                              style={buttonStyle}
+                              plain={false}
+                            >
+                              Delete
+                            </Button>
+                          </Box>
+                        </Box>
+                      )}
+                    </InfiniteScroll>
                   </Box>
-                )}
-              </InfiniteScroll>
+                </CardBody>
+              </Card>
             </Box>
-          </CardBody>
-        </Card>
-      </Box>
+          ) : (
+            <Box
+              round="xsmall"
+              align="center"
+              justify="center"
+              style={formStyle}
+              onLoad={getLinks}
+            >
+              <Card width="large">
+                <CardBody
+                  className="card_body"
+                  style={cardStyle}
+                  overflow="auto"
+                >
+                  <Box align="center">
+                  <Heading level="1" size="small" margin="10px">
+                      Your saved links
+                    </Heading>
+                    <Form onSubmit={addLink}>
+                    <FormField
+                        style={inputStyle}
+                        value={link}
+                        onChange={handleNameChange}
+                      >
+                        <TextInput
+                          className="link-input"
+                          placeholder="place your name here"
+                        ></TextInput>
+                      </FormField>
+                      <FormField
+                        width="medium"
+                        style={inputStyle}
+                        value={link}
+                        onChange={handleChange}
+                      >
+                        <TextInput placeholder="place your link here"></TextInput>
+                      </FormField>
+                      <Box width="medium" direction="row" justify="center">
+                        <Button
+                          type="submit"
+                          align="center"
+                          primary
+                          style={largeButtonStyle}
+                        >
+                          Add new
+                        </Button>
+                        <Button
+                          type="submit"
+                          primary
+                          onClick={getLinks}
+                          style={largeButtonStyle}
+                        >
+                          Refresh
+                        </Button>
+                      </Box>
+                    </Form>
+                    <InfiniteScroll items={links} step={100}>
+                      {(link, index) => (
+                        <Box
+                        direction="column"
+                        flex={false}
+                        pad={size}
+                        key={index}
+                        border={{ side: "bottom" }}
+                      >
+                        <Box
+                          direction="row"
+                          align="center"
+                          justify="between"
+                          alignContent="center"
+                          width={{ min: "30vw", max: "40vw" }}
+                        >
+                          <Text>{link}</Text>
+                          <Button
+                            type="submit"
+                            onClick={getLinks}
+                            style={buttonStyle}
+                            plain={false}
+                          >
+                            Delete
+                          </Button>
+                        </Box>
+                      </Box>
+                      )}
+                    </InfiniteScroll>
+                  </Box>
+                </CardBody>
+              </Card>
+            </Box>
+          )
+        }
+      </ResponsiveContext.Consumer>
     </>
   );
 };

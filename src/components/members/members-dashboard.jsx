@@ -8,10 +8,11 @@ import {
   formStyle,
   smallLMemStyle,
   smallCardStyle,
-  largeButtonStyle
+  largeButtonStyle,
 } from "../../styles";
 
 import {
+  Anchor,
   Box,
   Button,
   Form,
@@ -23,38 +24,51 @@ import {
   InfiniteScroll,
   ResponsiveContext,
   Heading,
+  List,
 } from "grommet";
 
-import firebase from 'firebase/app'
+import { Trash } from "grommet-icons";
+import { useHistory } from "react-router";
+
+import firebase from "firebase/app";
 
 const input = document.querySelector(".link-input");
-
+const input2 = document.querySelector(".link-input2");
 
 const MembersDashboard = () => {
   const { currentUser } = useContext(AuthContext);
   const [link, setLink] = useState("");
+  const [name, setName] = useState("");
   const [links, setLinks] = useState([]);
-
-
-  const addLink1 = (e) => {
-    e.preventDefault();
-    if (link && link !== undefined) {
-      database.collection("links").doc(currentUser.uid).update({
-        links: firebase.firestore.FieldValue.arrayUnion(link),
-        });
-    }
-  };
+  const history = useHistory();
 
   const addLink = (e) => {
     e.preventDefault();
-    console.log(link);
-    setLinks((links) => [...links, link]);
-    console.log(links);
     let savedLink = {
-      links: [...links, link],
+      name: name,
+      link: link,
     };
-    database.collection("links").doc(currentUser.uid).set(savedLink);
-    // input.value = "";
+    if (link && link !== undefined && name && name !== undefined) {
+      console.log("links", savedLink);
+      database
+        .collection("links")
+        .doc(currentUser.uid)
+        .update({
+          links: firebase.firestore.FieldValue.arrayUnion(savedLink),
+        });
+      setName("");
+    }
+  };
+
+  const removeLink = (data) => {
+    console.log("removing index", data);
+    database
+      .collection("links")
+      .doc(currentUser.uid)
+      .update({
+        links: firebase.firestore.FieldValue.arrayRemove(data),
+      });
+    // history.go(0);
   };
 
   const handleChange = (e) => {
@@ -63,14 +77,13 @@ const MembersDashboard = () => {
   };
   const handleNameChange = (e) => {
     e.preventDefault();
-    setLink(e.target.value);
+    setName(e.target.value);
   };
 
   const getLinks = () => {
     if (currentUser && database.collection("links").doc(currentUser.uid)) {
       let myLinks = database.collection("links").doc(currentUser.uid);
       myLinks.onSnapshot((doc) => {
-        console.log("current data", doc.data());
         if (doc.data() !== undefined) {
           console.log("current data", doc.data().links);
           setLinks(doc.data().links);
@@ -105,7 +118,7 @@ const MembersDashboard = () => {
                       Your saved links
                     </Heading>
                     <Form onSubmit={addLink}>
-                    <FormField
+                      <FormField
                         style={inputStyle}
                         value={link}
                         onChange={handleNameChange}
@@ -121,7 +134,7 @@ const MembersDashboard = () => {
                         onChange={handleChange}
                       >
                         <TextInput
-                          className="link-input"
+                          className="link-input2"
                           placeholder="place your link here"
                         ></TextInput>
                       </FormField>
@@ -160,14 +173,17 @@ const MembersDashboard = () => {
                             alignContent="center"
                             width={{ min: "70vw", max: "90vw" }}
                           >
-                            <Text>{link}</Text>
-                            <Button
-                              type="submit"
-                              onClick={getLinks}
-                              style={buttonStyle}
-                              plain={false}
+                            <Anchor
+                              onClick={() => window.location.replace(link.link)}
                             >
-                              Delete
+                              {link.name}
+                            </Anchor>
+                            <Button
+                              onClick={() => removeLink(link)}
+                              style={buttonStyle}
+                              plain={true}
+                            >
+                              <Trash color="brand" />
                             </Button>
                           </Box>
                         </Box>
@@ -192,11 +208,11 @@ const MembersDashboard = () => {
                   overflow="auto"
                 >
                   <Box align="center">
-                  <Heading level="1" size="small" margin="10px">
+                    <Heading level="1" size="small" margin="10px">
                       Your saved links
                     </Heading>
-                    <Form onSubmit={addLink1}>
-                    <FormField
+                    <Form onSubmit={addLink}>
+                      <FormField
                         style={inputStyle}
                         value={link}
                         onChange={handleNameChange}
@@ -212,7 +228,10 @@ const MembersDashboard = () => {
                         value={link}
                         onChange={handleChange}
                       >
-                        <TextInput placeholder="place your link here"></TextInput>
+                        <TextInput
+                          className="link-input2"
+                          placeholder="place your link here"
+                        ></TextInput>
                       </FormField>
                       <Box width="medium" direction="row" justify="center">
                         <Button
@@ -236,30 +255,31 @@ const MembersDashboard = () => {
                     <InfiniteScroll items={links} step={100}>
                       {(link, index) => (
                         <Box
-                        direction="column"
-                        flex={false}
-                        pad={size}
-                        key={index}
-                        border={{ side: "bottom" }}
-                      >
-                        <Box
-                          direction="row"
-                          align="center"
-                          justify="between"
-                          alignContent="center"
-                          width={{ min: "30vw", max: "40vw" }}
+                          direction="column"
+                          flex={false}
+                          pad={size}
+                          key={index}
+                          border={{ side: "bottom" }}
                         >
-                          <Text>{link}</Text>
-                          <Button
-                            type="submit"
-                            onClick={getLinks}
-                            style={buttonStyle}
-                            plain={false}
+                          <Box
+                            direction="row"
+                            align="center"
+                            justify="between"
+                            alignContent="center"
+                            width={{ min: "30vw", max: "40vw" }}
                           >
-                            Delete
-                          </Button>
+                            <Anchor onClick={() => window.open(link.link)}>
+                              {link.name}
+                            </Anchor>
+                            <Button
+                              onClick={() => removeLink(link)}
+                              style={buttonStyle}
+                              plain={true}
+                            >
+                              <Trash size="large" color="brand" />
+                            </Button>
+                          </Box>
                         </Box>
-                      </Box>
                       )}
                     </InfiniteScroll>
                   </Box>

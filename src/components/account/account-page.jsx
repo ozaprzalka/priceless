@@ -134,7 +134,7 @@ const AccountPage = () => {
           size === "small" ? (
             <Box fill align="center" justify="center" style={boxStyle}>
               <Box
-                border={{ color: "brand", size: { size } }}
+                border={{ color: "brand", size: size }}
                 pad={size}
                 gap={size}
                 round="xsmall"
@@ -150,7 +150,7 @@ const AccountPage = () => {
                 <Text>{console.log(userDetails)}</Text>
               </Box>
               <Box
-                border={{ color: "brand", size: { size } }}
+                border={{ color: "brand", size: size }}
                 pad={size}
                 gap={size}
                 round="xsmall"
@@ -181,7 +181,7 @@ const AccountPage = () => {
                 </Form>
               </Box>
               <Box
-                border={{ color: "brand", size: { size } }}
+                border={{ color: "brand", size: size }}
                 pad={size}
                 gap={size}
                 round="xsmall"

@@ -25,19 +25,23 @@ import {
   Heading,
 } from "grommet";
 
+import firebase from 'firebase/app'
+
 const input = document.querySelector(".link-input");
+
 
 const MembersDashboard = () => {
   const { currentUser } = useContext(AuthContext);
   const [link, setLink] = useState("");
   const [links, setLinks] = useState([]);
 
+
   const addLink1 = (e) => {
     e.preventDefault();
     if (link && link !== undefined) {
-      database.collection("links").doc(currentUser.uid).set({
-        links: link,
-      });
+      database.collection("links").doc(currentUser.uid).update({
+        links: firebase.firestore.FieldValue.arrayUnion(link),
+        });
     }
   };
 
@@ -50,7 +54,7 @@ const MembersDashboard = () => {
       links: [...links, link],
     };
     database.collection("links").doc(currentUser.uid).set(savedLink);
-    input.value = "";
+    // input.value = "";
   };
 
   const handleChange = (e) => {
@@ -191,7 +195,7 @@ const MembersDashboard = () => {
                   <Heading level="1" size="small" margin="10px">
                       Your saved links
                     </Heading>
-                    <Form onSubmit={addLink}>
+                    <Form onSubmit={addLink1}>
                     <FormField
                         style={inputStyle}
                         value={link}

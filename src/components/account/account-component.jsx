@@ -1,18 +1,9 @@
-import React, { useContext } from "react";
-import { Redirect } from "react-router";
-import { AuthContext } from "../../Auth";
+import React from "react";
 import AccountPage from "./account-page";
 
 export const AccountComponent = () => {
-  const { currentUser } = useContext(AuthContext);
   return (
     <div>
-
-      {/* {currentUser === null ? (
-        <Redirect to="/login" />
-      ) : (
-        <Redirect to="/account" />
-      )} */}
       <AccountPage></AccountPage>
     </div>
   );

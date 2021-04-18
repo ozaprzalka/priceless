@@ -204,6 +204,13 @@ const loadingStyle = {
   alignItems: "center",
 };
 
+const smallErrorStyle = {
+  fontSize: "14px",
+  marginLeft: "5px",
+  marginBottom: "16px",
+  color: "#FF1D23",
+};
+
 export {
   bodyStyle,
   headerStyle,
@@ -224,4 +231,5 @@ export {
   smallLoginStyle,
   smallLMemStyle,
   largeButtonStyle,
+  smallErrorStyle,
 };

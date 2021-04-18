@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { formStyle, inputStyle, smallFormStyle } from "../../styles";
+import { formStyle, inputStyle, smallFormStyle, loginStyle } from "../../styles";
 import {
   Box,
   Button,
@@ -20,6 +20,8 @@ const RegisterForm = ({ history }) => {
     confirmPassword: "",
   });
   const [valid, setValid] = useState(false);
+  const [error, setError] = useState();
+
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -46,7 +48,7 @@ const RegisterForm = ({ history }) => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.message);
       });
   };
 
@@ -61,7 +63,8 @@ const RegisterForm = ({ history }) => {
               justify="center"
               style={smallFormStyle}
               pad="large"
-            >
+            >              <Box style={loginStyle}>{error}</Box>
+
               <Box width="large">
                 <Form
                   style={{ marginTop: "10px" }}
@@ -155,7 +158,8 @@ const RegisterForm = ({ history }) => {
               justify="center"
               style={formStyle}
               pad="xlarge"
-            >
+            >                          <Box style={loginStyle}>{error}</Box>
+
               <Box width="large">
                 <Form
                   style={{ marginTop: "20px" }}

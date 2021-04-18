@@ -8,12 +8,10 @@ import {
   inputStyle,
   buttonStyle,
   smallAccountStyle,
-  largeButtonStyle
+  largeButtonStyle,
 } from "../../styles";
 import { database } from "../../base";
 import { useHistory } from "react-router";
-import app from "./../../base";
-import firebase from "firebase/app";
 
 import {
   Box,
@@ -45,27 +43,6 @@ const AccountPage = () => {
   const handleChangeUsername = (e) => {
     e.preventDefault();
     setusername(e.target.value);
-  };
-
-  const authenticate = () => {
-    let credential = userDetails.password;
-    console.log("creds", credential);
-    let providerData = app.auth().currentUser?.providerData;
-    console.log("provider", providerData);
-    console.log(`user is signed in with ${providerData[0].providerId}`);
-    let credentials = firebase.auth.EmailAuthProvider.credential(
-      userDetails.email,
-      credential
-    );
-    currentUser
-      .reauthenticateWithCredential(credentials)
-      .then(function () {
-        console.log("authenticated");
-        history.push('/change-pass')
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   };
 
   const changeUsername = () => {
@@ -165,7 +142,7 @@ const AccountPage = () => {
                 <Heading level="3" size={size} margin="0 0 10px 0">
                   Change your password
                 </Heading>
-                <Form onSubmit={authenticate}>
+                <Form onSubmit={() => history.push("/change-pass")}>
                   <Box direction="row" justify="center">
                     <Button type="submit" primary style={buttonStyle}>
                       change
@@ -233,7 +210,7 @@ const AccountPage = () => {
                 <Heading level="3" size="30px" margin="0 0 15px 0">
                   Change your password
                 </Heading>
-                <Form onSubmit={authenticate}>
+                <Form onSubmit={() => history.push("/change-pass")}>
                   <Box width="medium" direction="row" justify="center">
                     <Button
                       type="submit"

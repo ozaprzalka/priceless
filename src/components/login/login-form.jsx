@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import {
+  Anchor,
   Box,
   Button,
   Form,
@@ -83,6 +84,16 @@ const LoginForm = ({ history }) => {
                   <Button size="large" type="submit" label="LOGIN" primary />
                 </Form>
               </Box>
+              <Anchor
+                margin={{
+                  vertical: size,
+                }}
+                href="/#/forgot"
+                weight={3}
+                size={size}
+              >
+                Forgot password?
+              </Anchor>
             </Box>
           ) : (
             <Box
@@ -123,6 +134,15 @@ const LoginForm = ({ history }) => {
                   <Button size="large" type="submit" label="LOGIN" primary />
                 </Form>
               </Box>
+              <Anchor
+                margin={{
+                  vertical: "medium",
+                }}
+                href="/#/forgot"
+                weight={3}
+              >
+                Forgot password?
+              </Anchor>
             </Box>
           )
         }

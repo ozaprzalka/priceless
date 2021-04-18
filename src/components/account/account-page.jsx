@@ -1,18 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Auth";
+import { withRouter } from "react-router-dom";
+
 import {
   boxStyle,
   accountStyle,
   inputStyle,
   buttonStyle,
   smallAccountStyle,
-  largeButtonStyle
+  largeButtonStyle,
 } from "../../styles";
-import { Checkbox, CheckboxSelected } from "grommet-icons";
 import { database } from "../../base";
 import { useHistory } from "react-router";
-import app from "./../../base";
-import firebase from "firebase/app";
 
 import {
   Box,
@@ -27,27 +26,10 @@ import {
 
 const AccountPage = () => {
   const { currentUser } = useContext(AuthContext);
-  const [pass, setpass] = useState("");
   const [username, setusername] = useState("");
   const history = useHistory();
   const document = database.collection("users").doc(currentUser.uid);
   const [userDetails, setUserDetails] = useState("");
-
-  const getUsername = () => {
-    document.onSnapshot((doc) => {
-      let data = doc.data();
-      if (data["name"]) {
-        console.log(data["name"]);
-        return data["name"];
-      }
-    });
-  };
-
-  // const getName = () => {
-  //   document.get().then((snapshot) => {
-  //     setUserDetails(snapshot.data());
-  //   });
-  // };
 
   useEffect(() => {
     const setusr = document.get().then((snapshot) => {
@@ -61,38 +43,6 @@ const AccountPage = () => {
   const handleChangeUsername = (e) => {
     e.preventDefault();
     setusername(e.target.value);
-  };
-
-  const changePassword = () => {
-    let newPass = pass;
-    currentUser
-      .updatePassword(newPass)
-      .then(function () {
-        console.log("pass updated");
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-  };
-
-  const authenticate = () => {
-    let credential = userDetails.password;
-    console.log("creds", credential);
-    let providerData = app.auth().currentUser?.providerData;
-    console.log("provider", providerData);
-    console.log(`user is signed in with ${providerData[0].providerId}`);
-    let credentials = firebase.auth.EmailAuthProvider.credential(
-      userDetails.email,
-      credential
-    );
-    currentUser
-      .reauthenticateWithCredential(credentials)
-      .then(function () {
-        console.log("authenticated");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   };
 
   const changeUsername = () => {
@@ -192,7 +142,7 @@ const AccountPage = () => {
                 <Heading level="3" size={size} margin="0 0 10px 0">
                   Change your password
                 </Heading>
-                <Form onSubmit={authenticate}>
+                <Form onSubmit={() => history.push("/change-pass")}>
                   <Box direction="row" justify="center">
                     <Button type="submit" primary style={buttonStyle}>
                       change
@@ -260,7 +210,7 @@ const AccountPage = () => {
                 <Heading level="3" size="30px" margin="0 0 15px 0">
                   Change your password
                 </Heading>
-                <Form onSubmit={authenticate}>
+                <Form onSubmit={() => history.push("/change-pass")}>
                   <Box width="medium" direction="row" justify="center">
                     <Button
                       type="submit"
@@ -281,4 +231,4 @@ const AccountPage = () => {
   );
 };
 
-export default AccountPage;
+export default withRouter(AccountPage);

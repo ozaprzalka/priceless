@@ -1,20 +1,21 @@
 import React, { useContext } from "react";
-import LoginForm from "./login-form";
+import ForgotPassForm from "./forgot-pass-form";
 import { Redirect } from "react-router";
 import { AuthContext } from "../../Auth";
 
-export const LoginComponent = () => {
+
+export const ForgotPassComponent = () => {
   const { currentUser } = useContext(AuthContext);
 
   return (
     <>
       {currentUser === null ? (
-        <Redirect to="/login" />
+        <Redirect to="/forgot" />
       ) : (
         <Redirect to="/members" />
       )}
       <div>
-        <LoginForm></LoginForm>
+        <ForgotPassForm></ForgotPassForm>
       </div>
     </>
   );

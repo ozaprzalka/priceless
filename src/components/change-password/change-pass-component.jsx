@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import LoginForm from "./login-form";
-import { Redirect } from "react-router";
+import ChangePassForm from "./change-pass-page";
 import { AuthContext } from "../../Auth";
+import { Redirect } from "react-router";
 
-export const LoginComponent = () => {
+export const ChangePassComponent = () => {
   const { currentUser } = useContext(AuthContext);
 
   return (
@@ -11,11 +11,9 @@ export const LoginComponent = () => {
       {currentUser === null ? (
         <Redirect to="/login" />
       ) : (
-        <Redirect to="/members" />
+        <Redirect to="/change-pass" />
       )}
-      <div>
-        <LoginForm></LoginForm>
-      </div>
+      <ChangePassForm></ChangePassForm>
     </>
   );
 };

@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { formStyle, inputStyle, smallFormStyle } from "../../styles";
+import {
+  formStyle,
+  inputStyle,
+  smallFormStyle,
+  loginStyle,
+} from "../../styles";
 import {
   Box,
   Button,
@@ -20,6 +25,7 @@ const RegisterForm = ({ history }) => {
     confirmPassword: "",
   });
   const [valid, setValid] = useState(false);
+  const [error, setError] = useState();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -46,7 +52,7 @@ const RegisterForm = ({ history }) => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.message);
       });
   };
 
@@ -62,6 +68,8 @@ const RegisterForm = ({ history }) => {
               style={smallFormStyle}
               pad="large"
             >
+              {" "}
+              <Box style={loginStyle}>{error}</Box>
               <Box width="large">
                 <Form
                   style={{ marginTop: "10px" }}
@@ -156,6 +164,8 @@ const RegisterForm = ({ history }) => {
               style={formStyle}
               pad="xlarge"
             >
+              {" "}
+              <Box style={loginStyle}>{error}</Box>
               <Box width="large">
                 <Form
                   style={{ marginTop: "20px" }}
@@ -245,75 +255,6 @@ const RegisterForm = ({ history }) => {
           )
         }
       </ResponsiveContext.Consumer>
-      {/* <Box round="xsmall" align="center" justify="center" style={formStyle} pad="xlarge">
-      <Box width="large">
-        <Form style={{marginTop: "20px"}}
-        align="center"
-          validate="change"
-          onSubmit={handleSignup}
-          onValidate={(validationResults) => {
-            setValid(validationResults.valid);
-          }}
-          value={value}
-          onChange={(nextValue) => {
-            setValue(nextValue);
-          }}
-        >
-          <FormField
-            label="Username"
-            name="name"
-            required
-            validate={[{ regexp: /[a-zA-Z][a-zA-Z0-9-_]{2,16}$/ }]}
-          >
-            <TextInput style={inputStyle} name="name" type="name" />
-          </FormField>
-
-          <FormField
-            label="Email"
-            name="email"
-            required
-            validate={[
-              { regexp: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ },
-            ]}
-          >
-            <TextInput style={inputStyle} name="email" type="email" />
-          </FormField>
-
-          <FormField
-            label="Password"
-            name="password"
-            required
-            validate={[
-              {
-                regexp: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,15}$/,
-              },
-            ]}
-          >
-            <TextInput style={inputStyle} name="password" type="password" />
-          </FormField>
-
-          <FormField
-            label="Confirm Password"
-            name="confirmPassword"
-            info="Password must be at least 6 characters, contain a letter, number and special character"
-            required
-            validate={[
-              (confirmPassword) => {
-                if (confirmPassword !== value.password)
-                  return "Password mismatch";
-                return undefined;
-              },
-            ]}
-          >
-            <TextInput style={inputStyle} name="confirmPassword" type="password" />
-          </FormField>
-
-          <Box direction="row" justify="between" margin={{ top: "medium" }}>
-            <Button type="submit" label="SUBMIT" disabled={!valid} primary />
-          </Box>
-        </Form>
-      </Box>
-    </Box> */}
     </>
   );
 };

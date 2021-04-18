@@ -4,6 +4,7 @@ import { LoginComponent } from "./components/login/login-component";
 import { RegisterComponent } from "./components/register/register-component";
 import { HeaderComponent } from "./components/header/header-component";
 import { AboutComponent } from "./components/dashboard/about-component";
+import ChangePassForm  from "./components/change-password/change-pass-page";
 import AccountPage from "./components/account/account-page";
 import NotFound from "./components/notFound/not-found"
 import MembersDashboard from "./components/members/members-dashboard";
@@ -54,6 +55,7 @@ function App() {
                 exact
               />
               <PrivateRoute component={AccountPage} path="/account" exact />
+              <PrivateRoute component={ChangePassForm} path="/change-pass" exact />
               <Route path="*" component={NotFound} />
             </Switch>
           </HashRouter>

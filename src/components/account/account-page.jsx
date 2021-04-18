@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Auth";
+import { withRouter } from "react-router-dom";
+
 import {
   boxStyle,
   accountStyle,
@@ -8,7 +10,6 @@ import {
   smallAccountStyle,
   largeButtonStyle
 } from "../../styles";
-import { Checkbox, CheckboxSelected } from "grommet-icons";
 import { database } from "../../base";
 import { useHistory } from "react-router";
 import app from "./../../base";
@@ -27,27 +28,10 @@ import {
 
 const AccountPage = () => {
   const { currentUser } = useContext(AuthContext);
-  const [pass, setpass] = useState("");
   const [username, setusername] = useState("");
   const history = useHistory();
   const document = database.collection("users").doc(currentUser.uid);
   const [userDetails, setUserDetails] = useState("");
-
-  const getUsername = () => {
-    document.onSnapshot((doc) => {
-      let data = doc.data();
-      if (data["name"]) {
-        console.log(data["name"]);
-        return data["name"];
-      }
-    });
-  };
-
-  // const getName = () => {
-  //   document.get().then((snapshot) => {
-  //     setUserDetails(snapshot.data());
-  //   });
-  // };
 
   useEffect(() => {
     const setusr = document.get().then((snapshot) => {
@@ -61,18 +45,6 @@ const AccountPage = () => {
   const handleChangeUsername = (e) => {
     e.preventDefault();
     setusername(e.target.value);
-  };
-
-  const changePassword = () => {
-    let newPass = pass;
-    currentUser
-      .updatePassword(newPass)
-      .then(function () {
-        console.log("pass updated");
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
   };
 
   const authenticate = () => {
@@ -89,6 +61,7 @@ const AccountPage = () => {
       .reauthenticateWithCredential(credentials)
       .then(function () {
         console.log("authenticated");
+        history.push('/change-pass')
       })
       .catch(function (error) {
         console.log(error);
@@ -281,4 +254,4 @@ const AccountPage = () => {
   );
 };
 
-export default AccountPage;
+export default withRouter(AccountPage);

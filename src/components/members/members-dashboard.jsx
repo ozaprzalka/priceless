@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Auth";
 import { database } from "../../base";
+import { EmailListComponent } from "./email-component";
 import {
   cardStyle,
   inputStyle,
@@ -20,20 +21,15 @@ import {
   TextInput,
   Card,
   CardBody,
-  Text,
   InfiniteScroll,
   ResponsiveContext,
   Heading,
-  List,
 } from "grommet";
 
 import { Trash } from "grommet-icons";
 import { useHistory } from "react-router";
 
 import firebase from "firebase/app";
-
-const input = document.querySelector(".link-input");
-const input2 = document.querySelector(".link-input2");
 
 const MembersDashboard = () => {
   const { currentUser } = useContext(AuthContext);
@@ -193,6 +189,8 @@ const MembersDashboard = () => {
               </Card>
             </Box>
           ) : (
+            <>
+            <EmailListComponent></EmailListComponent>
             <Box
               round="xsmall"
               align="center"
@@ -285,6 +283,7 @@ const MembersDashboard = () => {
                 </CardBody>
               </Card>
             </Box>
+            </>
           )
         }
       </ResponsiveContext.Consumer>

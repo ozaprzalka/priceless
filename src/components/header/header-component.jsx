@@ -108,7 +108,7 @@ export const HeaderComponent = () => {
             <>
               <Header
                 background="#A593E0"
-                pad="medium"
+                pad={{ horizontal: "17%", vertical: "xsmall" }}
                 height="small"
                 style={headerStyle}
               >
@@ -116,6 +116,7 @@ export const HeaderComponent = () => {
                   alignSelf="end"
                   href={currentUser === null ? "/#" : "/#/members"}
                   label="Save with us!"
+                  margin={{ vertical: "xsmall" }}
                 />
 
                 <Avatar
@@ -125,7 +126,7 @@ export const HeaderComponent = () => {
                     height: "150px",
                     borderRadius: "20px",
                     padding: "0 150px",
-                    marginRight: "130px",
+                    marginRight: "150px",
                   }}
                 ></Avatar>
 
@@ -140,10 +141,12 @@ export const HeaderComponent = () => {
                     href={currentUser === null ? "/#/login" : "/#/logout"}
                     label={currentUser === null ? "Login" : "Logout"}
                     onClick={currentUser ? handleLogout : handleLogin}
+                    margin={{ horizontal: "20%", vertical: "xsmall" }}
                   />
                   <Anchor
                     href={currentUser === null ? "/#/register" : "/#/account"}
                     label={currentUser === null ? "Register" : "Account"}
+                    margin={{ horizontal: "20%", vertical: "xsmall" }}
                   />
                 </Box>
               </Header>

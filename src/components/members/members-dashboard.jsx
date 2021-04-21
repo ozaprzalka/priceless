@@ -85,7 +85,6 @@ const MembersDashboard = () => {
       let myLinks = database.collection("links").doc(currentUser.uid);
       myLinks.onSnapshot((doc) => {
         if (doc.data() !== undefined) {
-          console.log("current data", doc.data().links);
           setLinks(doc.data().links);
         }
       });

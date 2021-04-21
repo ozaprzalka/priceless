@@ -8,7 +8,7 @@ import {
   Menu,
   Avatar,
 } from "grommet";
-import { Power, UserManager } from "grommet-icons";
+import { Power, UserManager, Shop } from "grommet-icons";
 import { Menu as MenuIcon } from "grommet-icons";
 import { headerStyle, smallHeaderStyle, customFocus } from "../../styles";
 import { AuthContext } from "../../Auth";
@@ -99,6 +99,17 @@ export const HeaderComponent = () => {
                         icon: <UserManager color="#601cff" />,
                         gap: "medium",
                       },
+                      {
+                        label: (
+                          currentUser === null ? 
+                          <Box pad="small" style={smallHeaderStyle} >
+                            Partners
+                          </Box> : null
+                        ),
+                        href: currentUser === null ? "/#/partners" : null,
+                        icon: currentUser === null ? <Shop color="#601cff"  /> : null,
+                        gap: currentUser === null ? "medium" : null,
+                      },
                     ]}
                   />
                 </Box>
@@ -138,15 +149,20 @@ export const HeaderComponent = () => {
                   color="#362C63"
                 >
                   <Anchor
+                    href={currentUser === null ? "/#/partners" : null}
+                    label={currentUser === null ? "Partners" : null}
+                    margin={{ horizontal: "10%", vertical: "xsmall" }}
+                  />
+                  <Anchor
                     href={currentUser === null ? "/#/login" : "/#/logout"}
                     label={currentUser === null ? "Login" : "Logout"}
                     onClick={currentUser ? handleLogout : handleLogin}
-                    margin={{ horizontal: "20%", vertical: "xsmall" }}
+                    margin={{ horizontal: "10%", vertical: "xsmall" }}
                   />
                   <Anchor
                     href={currentUser === null ? "/#/register" : "/#/account"}
                     label={currentUser === null ? "Register" : "Account"}
-                    margin={{ horizontal: "20%", vertical: "xsmall" }}
+                    margin={{ horizontal: "10%", vertical: "xsmall" }}
                   />
                 </Box>
               </Header>

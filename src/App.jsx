@@ -5,6 +5,7 @@ import { RegisterComponent } from "./components/register/register-component";
 import { HeaderComponent } from "./components/header/header-component";
 import { AboutComponent } from "./components/dashboard/about-component";
 import { ForgotPassComponent } from "./components/forgot-password/forgot-pass-component";
+import { PartnersComponent } from "./components/carousel/carousel-component";
 import ChangePassForm from "./components/change-password/change-pass-page";
 import AccountPage from "./components/account/account-page";
 import NotFound from "./components/notFound/not-found";
@@ -52,6 +53,9 @@ function App() {
             <Switch>
               <Route exact path="/">
                 <AboutComponent />
+              </Route>
+              <Route path="/partners">
+                <PartnersComponent />
               </Route>
               <Route path="/register">
                 <RegisterComponent />

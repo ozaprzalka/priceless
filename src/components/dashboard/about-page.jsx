@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import RegisterPopup from "./popup";
-import { Box, Text, Paragraph, Heading } from "grommet";
+import { Box, Text, Paragraph, Heading, Carousel } from "grommet";
 import { boxStyle } from "../../styles";
 
 export const AboutPage = () => {
   return (
     <>
       <Box fill align="center" justify="center" style={boxStyle} pad="small">
-        {/* {checkBottom()} */}
-        <Box
+      <Box height="medium" width="xlarge" align="center" border={{ color: "brand", size: "medium" }} style={{ boxShadow: "2px 2px 17px 10px magenta"}}>
+                  <Carousel fill initialChild={1} play={2800}>
+                    <Box fill pad="xlarge" background="accent-1"></Box>
+                    <Box fill pad="xlarge" background="accent-2"></Box>
+                    <Box fill pad="xlarge" background="accent-3"></Box>
+                  </Carousel>
+                </Box>
+        <Box margin={{vertical: "xlarge"}}
           width="large"
           border={{ color: "brand", size: "medium" }}
           style={{ boxShadow: "2px 2px 17px 10px magenta", minHeight: "400px" }}
@@ -60,7 +66,15 @@ export const AboutPage = () => {
               </Paragraph>
             </Text>
           </Box>
+          
         </Box>
+        <Box height="medium" width="xlarge" align="center" border={{ color: "brand", size: "medium" }} style={{ boxShadow: "2px 2px 17px 10px magenta"}}>
+                  <Carousel fill initialChild={1} play={2800}>
+                    <Box fill pad="xlarge" background="accent-1"></Box>
+                    <Box fill pad="xlarge" background="accent-2"></Box>
+                    <Box fill pad="xlarge" background="accent-3"></Box>
+                  </Carousel>
+                </Box>
       </Box>
       <RegisterPopup />
     </>

@@ -41,6 +41,7 @@ const RegisterForm = ({ history }) => {
           email: e.value.email,
           password: e.value.password,
           uid: loggedIn.uid,
+          gdpr: false,
           created: loggedIn.metadata.lastSignInTime,
         };
         database.collection("users").doc(user.uid).set(user);

@@ -91,9 +91,9 @@ const LoginForm = ({ history }) => {
                 href="/#/forgot"
                 weight={3}
                 size={size}
-              >
-                Forgot password?
-              </Anchor>
+                style={{ textTransform: "capitalize" }}
+                label="Forgot Password?"
+              ></Anchor>
             </Box>
           ) : (
             <Box
@@ -140,9 +140,9 @@ const LoginForm = ({ history }) => {
                 }}
                 href="/#/forgot"
                 weight={3}
-              >
-                Forgot password?
-              </Anchor>
+                style={{ textTransform: "capitalize" }}
+                label="Forgot Password?"
+              ></Anchor>
             </Box>
           )
         }

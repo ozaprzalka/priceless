@@ -27,7 +27,6 @@ import {
 } from "grommet";
 
 import { Trash } from "grommet-icons";
-import { useHistory } from "react-router";
 
 import firebase from "firebase/app";
 
@@ -36,7 +35,6 @@ const MembersDashboard = () => {
   const [link, setLink] = useState("");
   const [name, setName] = useState("");
   const [links, setLinks] = useState([]);
-  const history = useHistory();
 
   const addLink = (e) => {
     e.preventDefault();
@@ -190,99 +188,99 @@ const MembersDashboard = () => {
             </Box>
           ) : (
             <>
-            <EmailListComponent></EmailListComponent>
-            <Box
-              round="xsmall"
-              align="center"
-              justify="center"
-              style={formStyle}
-              onLoad={getLinks}
-            >
-              <Card width="large">
-                <CardBody
-                  className="card_body"
-                  style={cardStyle}
-                  overflow="auto"
-                >
-                  <Box align="center">
-                    <Heading level="1" size="small" margin="10px">
-                      Your saved links
-                    </Heading>
-                    <Form onSubmit={addLink}>
-                      <FormField
-                        style={inputStyle}
-                        value={link}
-                        onChange={handleNameChange}
-                      >
-                        <TextInput
-                          className="link-input"
-                          placeholder="place your name here"
-                        ></TextInput>
-                      </FormField>
-                      <FormField
-                        width="medium"
-                        style={inputStyle}
-                        value={link}
-                        onChange={handleChange}
-                      >
-                        <TextInput
-                          className="link-input2"
-                          placeholder="place your link here"
-                        ></TextInput>
-                      </FormField>
-                      <Box width="medium" direction="row" justify="center">
-                        <Button
-                          type="submit"
-                          align="center"
-                          primary
-                          style={largeButtonStyle}
+              {/* <EmailListComponent></EmailListComponent> */}
+              <Box
+                round="xsmall"
+                align="center"
+                justify="center"
+                style={formStyle}
+                onLoad={getLinks}
+              >
+                <Card width="large">
+                  <CardBody
+                    className="card_body"
+                    style={cardStyle}
+                    overflow="auto"
+                  >
+                    <Box align="center">
+                      <Heading level="1" size="small" margin="10px">
+                        Your saved links
+                      </Heading>
+                      <Form onSubmit={addLink}>
+                        <FormField
+                          style={inputStyle}
+                          value={link}
+                          onChange={handleNameChange}
                         >
-                          Add new
-                        </Button>
-                        <Button
-                          type="submit"
-                          primary
-                          onClick={getLinks}
-                          style={largeButtonStyle}
+                          <TextInput
+                            className="link-input"
+                            placeholder="place your name here"
+                          ></TextInput>
+                        </FormField>
+                        <FormField
+                          width="medium"
+                          style={inputStyle}
+                          value={link}
+                          onChange={handleChange}
                         >
-                          Refresh
-                        </Button>
-                      </Box>
-                    </Form>
-                    <InfiniteScroll items={links} step={100}>
-                      {(link, index) => (
-                        <Box
-                          direction="column"
-                          flex={false}
-                          pad={size}
-                          key={index}
-                          border={{ side: "bottom" }}
-                        >
-                          <Box
-                            direction="row"
+                          <TextInput
+                            className="link-input2"
+                            placeholder="place your link here"
+                          ></TextInput>
+                        </FormField>
+                        <Box width="medium" direction="row" justify="center">
+                          <Button
+                            type="submit"
                             align="center"
-                            justify="between"
-                            alignContent="center"
-                            width={{ min: "30vw", max: "40vw" }}
+                            primary
+                            style={largeButtonStyle}
                           >
-                            <Anchor onClick={() => window.open(link.link)}>
-                              {link.name}
-                            </Anchor>
-                            <Button
-                              onClick={() => removeLink(link)}
-                              style={buttonStyle}
-                              plain={true}
-                            >
-                              <Trash size="large" color="brand" />
-                            </Button>
-                          </Box>
+                            Add new
+                          </Button>
+                          <Button
+                            type="submit"
+                            primary
+                            onClick={getLinks}
+                            style={largeButtonStyle}
+                          >
+                            Refresh
+                          </Button>
                         </Box>
-                      )}
-                    </InfiniteScroll>
-                  </Box>
-                </CardBody>
-              </Card>
-            </Box>
+                      </Form>
+                      <InfiniteScroll items={links} step={100}>
+                        {(link, index) => (
+                          <Box
+                            direction="column"
+                            flex={false}
+                            pad={size}
+                            key={index}
+                            border={{ side: "bottom" }}
+                          >
+                            <Box
+                              direction="row"
+                              align="center"
+                              justify="between"
+                              alignContent="center"
+                              width={{ min: "30vw", max: "40vw" }}
+                            >
+                              <Anchor onClick={() => window.open(link.link)}>
+                                {link.name}
+                              </Anchor>
+                              <Button
+                                onClick={() => removeLink(link)}
+                                style={buttonStyle}
+                                plain={true}
+                              >
+                                <Trash size="large" color="brand" />
+                              </Button>
+                            </Box>
+                          </Box>
+                        )}
+                      </InfiniteScroll>
+                    </Box>
+                  </CardBody>
+                </Card>
+              </Box>
             </>
           )
         }

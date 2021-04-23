@@ -16,28 +16,18 @@ import { Reset } from "styled-reset";
 import { AuthProvider } from "./Auth";
 import PrivateRoute from "./PrivateRoute";
 import { Box, Image } from "grommet";
-import ErrorPage from "./components/notFound/error.jpeg"
-import Loadable from "react-loadable";
+// import ErrorPage from "./components/notFound/error.jpeg";
+// import Loadable from "react-loadable";
 
-function Loading({ error, pastDelay }) {
-  if (error) {
-    return "Oh nooess!";
-  } else {
-    return pastDelay ? <h3>Loading...</h3> : null;
-  }
-}
-
-const bgr = `linear-gradient(90deg, hsla(251, 100%, 48%, 1) 0%, hsla(266, 100%, 48%, 1) 0.1%, hsla(274, 100%, 47%, 1) 0.2%, hsla(280, 100%, 47%, 1) 0.3%, hsla(286, 100%, 45%, 1) 0.4%, hsla(291, 100%, 43%, 1) 0.5%, hsla(300, 100%, 41%, 1) 8.6%, hsla(310, 100%, 43%, 1) 7.7%, hsla(317, 100%, 45%, 1) 5.8%, hsla(326, 100%, 47%, 1) 0.9%)`;
+// function Loading({ error, pastDelay }) {
+//   if (error) {
+//     return "Oh nooess!";
+//   } else {
+//     return pastDelay ? <h3>Loading...</h3> : null;
+//   }
+// }
 
 function App() {
-
-  // if (Error) {
-  //   return (
-  //     <Box fill>
-  //       <Image src={ErrorPage} alt="Logo" />
-  //     </Box>
-  //   );
-  // }
 
   return (
     <>

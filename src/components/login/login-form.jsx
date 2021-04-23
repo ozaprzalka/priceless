@@ -30,7 +30,6 @@ const LoginForm = ({ history }) => {
       app
         .auth()
         .signInWithEmailAndPassword(e.value.username, e.value.password)
-
         .then(() => {
           history.push("/members");
         })

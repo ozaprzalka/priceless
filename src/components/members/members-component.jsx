@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Redirect } from "react-router";
 import { AuthContext } from "../../Auth";
 import MembersDashboard from "./members-dashboard";
-import EmailListComponent from "./email-component"
 
 export const MembersComponent = () => {
   const { currentUser } = useContext(AuthContext);
@@ -13,7 +12,6 @@ export const MembersComponent = () => {
       ) : (
         <Redirect to="/members" />
       )}
-
       <MembersDashboard></MembersDashboard>
     </>
   );

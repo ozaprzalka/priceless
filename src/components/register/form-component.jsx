@@ -41,7 +41,6 @@ const RegisterForm = ({ history }) => {
           email: e.value.email,
           password: e.value.password,
           uid: loggedIn.uid,
-          gdpr: false,
           created: loggedIn.metadata.lastSignInTime,
         };
         database.collection("users").doc(user.uid).set(user);
@@ -69,7 +68,6 @@ const RegisterForm = ({ history }) => {
               style={smallFormStyle}
               pad="large"
             >
-              {" "}
               <Box style={loginStyle}>{error}</Box>
               <Box width="large">
                 <Form
@@ -93,7 +91,6 @@ const RegisterForm = ({ history }) => {
                   >
                     <TextInput style={inputStyle} name="name" type="name" />
                   </FormField>
-
                   <FormField
                     label="Email"
                     name="email"
@@ -104,7 +101,6 @@ const RegisterForm = ({ history }) => {
                   >
                     <TextInput style={inputStyle} name="email" type="email" />
                   </FormField>
-
                   <FormField
                     label="Password"
                     name="password"
@@ -121,7 +117,6 @@ const RegisterForm = ({ history }) => {
                       type="password"
                     />
                   </FormField>
-
                   <FormField
                     label="Confirm Password"
                     name="confirmPassword"
@@ -141,7 +136,6 @@ const RegisterForm = ({ history }) => {
                       type="password"
                     />
                   </FormField>
-
                   <Box
                     direction="row"
                     justify="between"
@@ -165,7 +159,6 @@ const RegisterForm = ({ history }) => {
               style={formStyle}
               pad="xlarge"
             >
-              {" "}
               <Box style={loginStyle}>{error}</Box>
               <Box width="large">
                 <Form
@@ -189,7 +182,6 @@ const RegisterForm = ({ history }) => {
                   >
                     <TextInput style={inputStyle} name="name" type="name" />
                   </FormField>
-
                   <FormField
                     label="Email"
                     name="email"
@@ -200,7 +192,6 @@ const RegisterForm = ({ history }) => {
                   >
                     <TextInput style={inputStyle} name="email" type="email" />
                   </FormField>
-
                   <FormField
                     label="Password"
                     name="password"
@@ -217,7 +208,6 @@ const RegisterForm = ({ history }) => {
                       type="password"
                     />
                   </FormField>
-
                   <FormField
                     label="Confirm Password"
                     name="confirmPassword"
@@ -237,7 +227,6 @@ const RegisterForm = ({ history }) => {
                       type="password"
                     />
                   </FormField>
-
                   <Box
                     direction="row"
                     justify="between"

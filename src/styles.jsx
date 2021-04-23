@@ -148,6 +148,13 @@ const inputStyle = {
   margin: "10px 0",
   borderRadius: "10px",
 };
+const emailInputStyle = {
+  backgroundColor: "white",
+  border: "2px solid magenta",
+  margin: "10px 0",
+  borderRadius: "10px",
+  color: '#601cff'
+}
 
 const buttonStyle = {
   padding: "2px 10px",
@@ -155,11 +162,25 @@ const buttonStyle = {
   textTransform: "uppercase",
 };
 
+const emailButtonStyle = {
+  width: "20vw",
+  padding: "2px 10px",
+  margin: "5px",
+  backgroundColor: "magenta",
+}
+
 const largeButtonStyle = {
   padding: "12px 25px",
   margin: "15px",
   textTransform: "uppercase",
 };
+
+const largeEmailButtonStyle = {
+  width: "10vw",
+  padding: "2px 10px",
+  margin: "5px",
+  backgroundColor: "magenta",
+}
 
 const boxStyle = {
   minHeight: "660px",
@@ -232,4 +253,7 @@ export {
   smallLMemStyle,
   largeButtonStyle,
   smallErrorStyle,
+  emailButtonStyle,
+  emailInputStyle,
+  largeEmailButtonStyle
 };

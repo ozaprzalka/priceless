@@ -134,7 +134,7 @@ const smallLMemStyle = {
   margin: "20% 10%",
   color: "#601cff",
   minWidth: "80%",
-  minHeight: "570px",
+  minHeight: "270px",
 };
 
 const aboutStyle = {

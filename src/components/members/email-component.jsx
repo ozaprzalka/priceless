@@ -16,7 +16,7 @@ import {
   TextInput,
   Button,
 } from "grommet";
-import Fade from "react-reveal/Flash";
+import Rotate from "react-reveal/Rotate";
 
 export const EmailListComponent = () => {
   const { currentUser } = useContext(AuthContext);
@@ -52,7 +52,7 @@ export const EmailListComponent = () => {
         {(size) =>
           size === "small"
             ? !userDetails.gdpr && (
-                <Fade delay={900}>
+                <Rotate top left delay={500}>
                   <Box
                     pad={{ top: "medium", bottom: "small" }}
                     background="brand"
@@ -102,60 +102,63 @@ export const EmailListComponent = () => {
                       </Form>
                     </Box>
                   </Box>
-                </Fade>
+                </Rotate>
               )
             : !userDetails.gdpr && (
-                <Fade delay={900}>
-                  <Box
-                    pad="large"
-                    background="brand"
-                    justify="center"
-                    width="30vw"
-                  >
-                    <Heading
-                      textAlign="center"
-                      level="3"
-                      margin={{
-                        vertical: "xsmall",
-                      }}
+                <>
+                  <Rotate top left delay={500}>
+                    <Box
+                      pad="medium"
+                      background="brand"
+                      justify="center"
+                      width="30vw"
+                      style={{ marginTop: "18px", marginLeft: "70px" }}
                     >
-                      Subscribe to our newsletter
-                    </Heading>
-                    <Heading
-                      textAlign="center"
-                      level="4"
-                      margin={{
-                        vertical: "xsmall",
-                      }}
-                    >
-                      Never miss a chance for great deal
-                    </Heading>
-                    <Box pad="small">
-                      <Form onSubmit={saveGdpr}>
-                        <FormField
-                          style={emailInputStyle}
-                          value={agreement}
-                          onChange={handleChange}
-                        >
-                          <TextInput
-                            type="email"
-                            placeholder="give us your email"
-                          ></TextInput>
-                        </FormField>
-                        <Box direction="row" justify="center">
-                          <Button
-                            type="submit"
-                            align="end"
-                            secondary
-                            style={largeEmailButtonStyle}
-                            label="signup"
-                            color="magenta"
-                          ></Button>
-                        </Box>
-                      </Form>
+                      <Heading
+                        textAlign="center"
+                        level="3"
+                        margin={{
+                          vertical: "xsmall",
+                        }}
+                      >
+                        Subscribe to our newsletter
+                      </Heading>
+                      <Heading
+                        textAlign="center"
+                        level="4"
+                        margin={{
+                          vertical: "xsmall",
+                        }}
+                      >
+                        Never miss a chance for great deal
+                      </Heading>
+                      <Box pad="small">
+                        <Form onSubmit={saveGdpr}>
+                          <FormField
+                            style={emailInputStyle}
+                            value={agreement}
+                            onChange={handleChange}
+                          >
+                            <TextInput
+                              type="email"
+                              placeholder="give us your email"
+                            ></TextInput>
+                          </FormField>
+                          <Box direction="row" justify="center">
+                            <Button
+                              type="submit"
+                              align="end"
+                              secondary
+                              style={largeEmailButtonStyle}
+                              label="signup"
+                              color="magenta"
+                            ></Button>
+                          </Box>
+                        </Form>
+                      </Box>
                     </Box>
-                  </Box>
-                </Fade>
+                  </Rotate>
+                </>
               )
         }
       </ResponsiveContext.Consumer>

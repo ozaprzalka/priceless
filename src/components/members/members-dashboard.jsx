@@ -6,10 +6,10 @@ import {
   cardStyle,
   inputStyle,
   buttonStyle,
-  formStyle,
   smallLMemStyle,
   smallCardStyle,
   largeButtonStyle,
+  membersStyle,
 } from "../../styles";
 
 import {
@@ -24,10 +24,11 @@ import {
   InfiniteScroll,
   ResponsiveContext,
   Heading,
+  Image,
 } from "grommet";
 
 import { Trash } from "grommet-icons";
-
+import meow from "./meow.png";
 import firebase from "firebase/app";
 
 const MembersDashboard = () => {
@@ -91,106 +92,119 @@ const MembersDashboard = () => {
 
   return (
     <>
-      <EmailListComponent></EmailListComponent>
+      {/* <EmailListComponent></EmailListComponent> */}
       <ResponsiveContext.Consumer>
         {(size) =>
           size === "small" ? (
-            <Box
-              round="xsmall"
-              align="center"
-              justify="center"
-              style={smallLMemStyle}
-              onLoad={getLinks}
-            >
-              <Card width="large" style={smallCardStyle}>
-                <CardBody className="card_body" overflow="auto">
-                  <Box align="center">
-                    <Heading level="1" size="small" margin="10px">
-                      Your saved links
-                    </Heading>
-                    <Form onSubmit={addLink}>
-                      <FormField
-                        style={inputStyle}
-                        value={link}
-                        onChange={handleNameChange}
-                      >
-                        <TextInput
-                          className="link-input"
-                          placeholder="place your name here"
-                        ></TextInput>
-                      </FormField>
-                      <FormField
-                        style={inputStyle}
-                        value={link}
-                        onChange={handleChange}
-                      >
-                        <TextInput
-                          className="link-input2"
-                          placeholder="place your link here"
-                        ></TextInput>
-                      </FormField>
-                      <Box width="100%" direction="row">
-                        <Button
-                          type="submit"
-                          align="center"
-                          primary
-                          style={buttonStyle}
-                        >
-                          Add new
-                        </Button>
-                        <Button
-                          type="submit"
-                          primary
-                          onClick={getLinks}
-                          style={buttonStyle}
-                        >
-                          Refresh
-                        </Button>
-                      </Box>
-                    </Form>
-                    <InfiniteScroll items={links} step={100}>
-                      {(link, index) => (
-                        <Box
-                          direction="column"
-                          flex={false}
-                          pad={size}
-                          key={index}
-                          border={{ side: "bottom" }}
-                        >
-                          <Box
-                            direction="row"
-                            align="center"
-                            justify="between"
-                            alignContent="center"
-                            width={{ min: "70vw", max: "90vw" }}
-                          >
-                            <Anchor
-                              onClick={() => window.location.replace(link.link)}
-                            >
-                              {link.name}
-                            </Anchor>
-                            <Button
-                              onClick={() => removeLink(link)}
-                              style={buttonStyle}
-                              plain={true}
-                            >
-                              <Trash color="brand" />
-                            </Button>
-                          </Box>
-                        </Box>
-                      )}
-                    </InfiniteScroll>
-                  </Box>
-                </CardBody>
-              </Card>
-            </Box>
-          ) : (
             <>
+              <Box direction="column" fill justify="center">
+                <EmailListComponent></EmailListComponent>
+                <Image width="370px" src={meow} alt="Meow" />
+              </Box>
               <Box
                 round="xsmall"
                 align="center"
                 justify="center"
-                style={formStyle}
+                style={smallLMemStyle}
+                onLoad={getLinks}
+              >
+                <Card width="large" style={smallCardStyle}>
+                  <CardBody className="card_body" overflow="auto">
+                    <Box align="center">
+                      <Heading level="1" size="small" margin="10px">
+                        Your saved links
+                      </Heading>
+                      <Form onSubmit={addLink}>
+                        <FormField
+                          style={inputStyle}
+                          value={link}
+                          onChange={handleNameChange}
+                        >
+                          <TextInput
+                            className="link-input"
+                            placeholder="place your name here"
+                          ></TextInput>
+                        </FormField>
+                        <FormField
+                          style={inputStyle}
+                          value={link}
+                          onChange={handleChange}
+                        >
+                          <TextInput
+                            className="link-input2"
+                            placeholder="place your link here"
+                          ></TextInput>
+                        </FormField>
+                        <Box width="100%" direction="row">
+                          <Button
+                            type="submit"
+                            align="center"
+                            primary
+                            style={buttonStyle}
+                          >
+                            Add new
+                          </Button>
+                          <Button
+                            type="submit"
+                            primary
+                            onClick={getLinks}
+                            style={buttonStyle}
+                          >
+                            Refresh
+                          </Button>
+                        </Box>
+                      </Form>
+                      <InfiniteScroll items={links} step={100}>
+                        {(link, index) => (
+                          <Box
+                            direction="column"
+                            flex={false}
+                            pad={size}
+                            key={index}
+                            border={{ side: "bottom" }}
+                          >
+                            <Box
+                              direction="row"
+                              align="center"
+                              justify="between"
+                              alignContent="center"
+                              width={{ min: "70vw", max: "90vw" }}
+                            >
+                              <Anchor
+                                onClick={() =>
+                                  window.location.replace(link.link)
+                                }
+                              >
+                                {link.name}
+                              </Anchor>
+                              <Button
+                                onClick={() => removeLink(link)}
+                                style={buttonStyle}
+                                plain={true}
+                              >
+                                <Trash color="brand" />
+                              </Button>
+                            </Box>
+                          </Box>
+                        )}
+                      </InfiniteScroll>
+                    </Box>
+                  </CardBody>
+                </Card>
+              </Box>
+            </>
+          ) : (
+            <>
+              <Box direction="row" fill justify="center">
+                <EmailListComponent></EmailListComponent>
+                <Image height="500px" src={meow} alt="Meow" />
+              </Box>
+
+              <Box
+                round="xsmall"
+                align="center"
+                justify="center"
+                style={membersStyle}
                 onLoad={getLinks}
               >
                 <Card width="large">

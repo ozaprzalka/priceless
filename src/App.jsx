@@ -10,25 +10,15 @@ import ChangePassForm from "./components/change-password/change-pass-page";
 import AccountPage from "./components/account/account-page";
 import NotFound from "./components/notFound/not-found";
 import MembersDashboard from "./components/members/members-dashboard";
+import { NewsDashboard } from "./components/news/news-dashboard";
 
 import { bodyStyle } from "./styles";
 import { Reset } from "styled-reset";
 import { AuthProvider } from "./Auth";
 import PrivateRoute from "./PrivateRoute";
-import { Box, Image } from "grommet";
-// import ErrorPage from "./components/notFound/error.jpeg";
-// import Loadable from "react-loadable";
-
-// function Loading({ error, pastDelay }) {
-//   if (error) {
-//     return "Oh nooess!";
-//   } else {
-//     return pastDelay ? <h3>Loading...</h3> : null;
-//   }
-// }
+import { Box } from "grommet";
 
 function App() {
-
   return (
     <>
       <Reset />
@@ -67,6 +57,7 @@ function App() {
                 path="/change-pass"
                 exact
               />
+              <PrivateRoute component={NewsDashboard} path="/news" exact />
               <Route path="*" component={NotFound} />
             </Switch>
           </HashRouter>

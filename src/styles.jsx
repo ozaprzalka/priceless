@@ -76,6 +76,8 @@ const headerStyle = {
   fontFamily: "Kalam, cursive",
   fontSize: "30px",
   color: "#362C63",
+  boxShadow: "2px 2px 17px 10px magenta",
+  borderBottom: "2px solid #601cff",
 };
 
 const smallHeaderStyle = {
@@ -89,6 +91,16 @@ const formStyle = {
   fontWeight: "bold",
   backgroundColor: "#A593E0",
   margin: "10% 30%",
+  color: "#601cff",
+  maxWidth: "50%",
+  boxShadow: "2px 2px 17px 10px magenta",
+};
+
+const membersStyle = {
+  textTransform: "uppercase",
+  fontWeight: "bold",
+  backgroundColor: "#A593E0",
+  margin: "3% 30%",
   color: "#601cff",
   maxWidth: "50%",
   boxShadow: "2px 2px 17px 10px magenta",
@@ -153,8 +165,8 @@ const emailInputStyle = {
   border: "2px solid magenta",
   margin: "10px 0",
   borderRadius: "10px",
-  color: '#601cff'
-}
+  color: "#601cff",
+};
 
 const buttonStyle = {
   padding: "2px 10px",
@@ -167,7 +179,7 @@ const emailButtonStyle = {
   padding: "2px 10px",
   margin: "5px",
   backgroundColor: "magenta",
-}
+};
 
 const largeButtonStyle = {
   padding: "12px 25px",
@@ -180,7 +192,7 @@ const largeEmailButtonStyle = {
   padding: "2px 10px",
   margin: "5px",
   backgroundColor: "magenta",
-}
+};
 
 const boxStyle = {
   minHeight: "660px",
@@ -232,6 +244,21 @@ const smallErrorStyle = {
   color: "#FF1D23",
 };
 
+const newstyle = {
+  fontWeight: "bold",
+  backgroundColor: "#A593E0",
+  color: "#601cff",
+  maxWidth: "50%",
+  boxShadow: "2px 2px 17px 10px magenta",
+};
+
+const smallNewstyle = {
+  fontWeight: "bold",
+  backgroundColor: "#A593E0",
+  color: "#601cff",
+  maxWidth: "80%",
+  boxShadow: "2px 2px 17px 10px magenta",
+};
 export {
   bodyStyle,
   headerStyle,
@@ -255,5 +282,8 @@ export {
   smallErrorStyle,
   emailButtonStyle,
   emailInputStyle,
-  largeEmailButtonStyle
+  largeEmailButtonStyle,
+  newstyle,
+  smallNewstyle,
+  membersStyle,
 };

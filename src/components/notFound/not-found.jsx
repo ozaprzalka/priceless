@@ -6,7 +6,7 @@ const bgr = errorPage;
 const notFound = () => {
   return (
     <Box fill>
-      <Image src={bgr} alt="Logo" />
+      <Image src={bgr} alt="Error" />
     </Box>
   );
 };

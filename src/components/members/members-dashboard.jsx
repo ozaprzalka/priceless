@@ -43,7 +43,6 @@ const MembersDashboard = () => {
       link: link,
     };
     if (link && link !== undefined && name && name !== undefined) {
-      console.log("links", savedLink);
       database
         .collection("links")
         .doc(currentUser.uid)
@@ -55,14 +54,12 @@ const MembersDashboard = () => {
   };
 
   const removeLink = (data) => {
-    console.log("removing index", data);
     database
       .collection("links")
       .doc(currentUser.uid)
       .update({
         links: firebase.firestore.FieldValue.arrayRemove(data),
       });
-    // history.go(0);
   };
 
   const handleChange = (e) => {
@@ -94,6 +91,7 @@ const MembersDashboard = () => {
 
   return (
     <>
+      <EmailListComponent></EmailListComponent>
       <ResponsiveContext.Consumer>
         {(size) =>
           size === "small" ? (
@@ -188,7 +186,6 @@ const MembersDashboard = () => {
             </Box>
           ) : (
             <>
-              {/* <EmailListComponent></EmailListComponent> */}
               <Box
                 round="xsmall"
                 align="center"

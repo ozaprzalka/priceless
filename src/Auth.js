@@ -9,14 +9,11 @@ export const AuthProvider = ({ children }) => {
   const [pending, setPending] = useState(true);
 
   useEffect(() => {
-    console.log("auth provider");
     if (currentUser) {
       return;
     }
-    console.log("auth provider 2");
     const listen = app.auth().onAuthStateChanged((user) => {
       setCurrentUser(user);
-      console.log("from auth", user ? user.uid : null);
       setPending(false);
     });
     return listen;

@@ -7,12 +7,7 @@ import {
   TextInput,
   ResponsiveContext,
 } from "grommet";
-import {
-  formStyle,
-  inputStyle,
-  smallLoginStyle,
-  smallErrorStyle
-} from "../../styles";
+import { formStyle, inputStyle, smallLoginStyle } from "../../styles";
 import app from "../../base";
 import { withRouter } from "react-router";
 
@@ -49,7 +44,6 @@ const ForgotPassForm = ({ history }) => {
               justify="center"
               style={smallLoginStyle}
             >
-              {/* <Box style={smallErrorStyle} justify="center" pad={{horizontal: "large"}}>{error}</Box> */}
               <Box width="xlarge" pad="large">
                 <Form align="center" validate="change" onSubmit={resetPassword}>
                   <FormField
@@ -78,7 +72,6 @@ const ForgotPassForm = ({ history }) => {
               pad="xlarge"
               style={formStyle}
             >
-              {/* <Box style={loginStyle}>{error}</Box> */}
               <Box width="xlarge">
                 <Form align="center" validate="change" onSubmit={resetPassword}>
                   <FormField

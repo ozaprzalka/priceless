@@ -24,7 +24,6 @@ export const HeaderComponent = () => {
     e.preventDefault();
     try {
       app.auth().signOut();
-      console.log("out");
     } catch (err) {
       console.log(err);
     }
@@ -86,7 +85,6 @@ export const HeaderComponent = () => {
                         href: currentUser === null ? "/#/login" : "/#/logout",
                         icon: <Power color="#601cff" />,
                         gap: "medium",
-                        // pad: 'medium'
                       },
                       {
                         label: (
@@ -100,14 +98,17 @@ export const HeaderComponent = () => {
                         gap: "medium",
                       },
                       {
-                        label: (
-                          currentUser === null ? 
-                          <Box pad="small" style={smallHeaderStyle} >
-                            Partners
-                          </Box> : null
-                        ),
+                        label:
+                          currentUser === null ? (
+                            <Box pad="small" style={smallHeaderStyle}>
+                              Partners
+                            </Box>
+                          ) : null,
                         href: currentUser === null ? "/#/partners" : null,
-                        icon: currentUser === null ? <Shop color="#601cff"  /> : null,
+                        icon:
+                          currentUser === null ? (
+                            <Shop color="#601cff" />
+                          ) : null,
                         gap: currentUser === null ? "medium" : null,
                       },
                     ]}
@@ -170,7 +171,6 @@ export const HeaderComponent = () => {
           )
         }
       </ResponsiveContext.Consumer>
-      {/* </Header> */}
     </Grommet>
   );
 };

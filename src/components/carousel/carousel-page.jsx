@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Grommet,
   Box,
-  Text,
+  Image,
   Heading,
   Carousel,
   ResponsiveContext,
 } from "grommet";
-import { boxStyle, smallAccountStyle, customFocus } from "../../styles";
+import { boxStyle, customFocus } from "../../styles";
+import partner1 from "./partner1.jpeg";
+import partner2 from "./partner2.jpeg";
+import partner3 from "./partner3.jpeg";
 
 import { Gift, Shop } from "grommet-icons";
 
@@ -18,40 +21,53 @@ export const PartnersPage = () => {
         {(size) =>
           size === "small" ? (
             <Grommet theme={customFocus}>
-            <Box style={boxStyle}>
-              <Box>
-                <Heading
-                  level="2"
-                  textAlign="center"
-                  margin={{ vertical: "medium", horizontal: "large" }}
+              <Box style={boxStyle}>
+                <Box>
+                  <Heading
+                    level="2"
+                    textAlign="center"
+                    margin={{ vertical: "medium", horizontal: "large" }}
+                  >
+                    <Gift color="white" /> Our partners prepared many discount
+                    codes for every user {""}
+                  </Heading>
+                  <Heading
+                    level="3"
+                    textAlign="center"
+                    margin={{ vertical: "small", horizontal: "large" }}
+                  >
+                    For sure you can find something for yourself {""}
+                    <Shop color="white" />
+                  </Heading>
+                  <Heading
+                    level="4"
+                    textAlign="center"
+                    margin={{ vertical: "small", horizontal: "large" }}
+                  >
+                    Main partners: {""}
+                  </Heading>
+                </Box>
+                <Box
+                  width="320"
+                  height="320"
+                  align="center"
+                  border={{ color: "brand", size: "medium" }}
+                  margin={{ vertical: "xlarge", horizontal: "large" }}
+                  style={{ boxShadow: "2px 2px 17px 10px magenta" }}
                 >
-                  <Gift color="white" /> Our partners prepared many discount
-                  codes for every user {""}
-                </Heading>
-                <Heading
-                  level="3"
-                  textAlign="center"
-                  margin={{ vertical: "small", horizontal: "large" }}
-                >
-                  For sure you can find something for yourself {""}
-                  <Shop color="white" />
-                </Heading>
-                <Heading
-                  level="4"
-                  textAlign="center"
-                  margin={{ vertical: "small", horizontal: "large" }}
-                >
-                  Main partners: {""}
-                </Heading>
-              </Box>
-              <Box height="70vh" align="center" pad="xlarge">
-                  <Carousel fill initialChild={1} play={2800}>
-                    <Box fill pad="xlarge" background="accent-1"></Box>
-                    <Box fill pad="xlarge" background="accent-2"></Box>
-                    <Box fill pad="xlarge" background="accent-3"></Box>
+                  <Carousel fill initialChild={0} play={2800}>
+                    <Box>
+                      <Image fill src={partner1} alt="Partner1" />
+                    </Box>
+                    <Box>
+                      <Image fill src={partner2} alt="Partner1" />
+                    </Box>
+                    <Box>
+                      <Image fill src={partner3} alt="Partner1" />
+                    </Box>
                   </Carousel>
                 </Box>
-            </Box>
+              </Box>
             </Grommet>
           ) : (
             <Grommet theme={customFocus}>
@@ -62,7 +78,7 @@ export const PartnersPage = () => {
                 style={boxStyle}
                 pad="xsmall"
               >
-                <Box >
+                <Box>
                   <Heading
                     level="2"
                     textAlign="center"
@@ -84,16 +100,47 @@ export const PartnersPage = () => {
                   <Heading
                     level="1"
                     textAlign="center"
-                    margin={{ vertical: "small", horizontal: "large", bottom: "medium"}}
+                    margin={{
+                      vertical: "small",
+                      horizontal: "large",
+                      bottom: "medium",
+                    }}
                   >
                     Main partners: {""}
                   </Heading>
                 </Box>
-                <Box height="large" width="xlarge" align="center" border={{ color: "brand", size: "medium" }} style={{ boxShadow: "2px 2px 17px 10px magenta"}}>
+                <Box
+                  height="large"
+                  width="1000px"
+                  align="center"
+                  border={{ color: "brand", size: "medium" }}
+                  style={{ boxShadow: "2px 2px 17px 10px magenta" }}
+                >
                   <Carousel fill initialChild={1} play={2800}>
-                    <Box fill pad="xlarge" background="accent-1"></Box>
-                    <Box fill pad="xlarge" background="accent-2"></Box>
-                    <Box fill pad="xlarge" background="accent-3"></Box>
+                    <Box>
+                      <Image
+                        fill
+                        style={{ minWidth: "1000px" }}
+                        src={partner1}
+                        alt="Partner 1"
+                      />
+                    </Box>
+                    <Box>
+                      <Image
+                        fill
+                        style={{ minWidth: "1000px" }}
+                        src={partner2}
+                        alt="Partner 2"
+                      />
+                    </Box>
+                    <Box>
+                      <Image
+                        fill
+                        style={{ minWidth: "1000px" }}
+                        src={partner3}
+                        alt="Partner 3"
+                      />
+                    </Box>
                   </Carousel>
                 </Box>
               </Box>

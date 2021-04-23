@@ -142,7 +142,7 @@ export const AboutPage = () => {
                   border={{ color: "brand", size: "medium" }}
                   style={{ boxShadow: "2px 2px 17px 10px magenta" }}
                 >
-                  <Carousel fill initialChild={1} play={2800}>
+                  <Carousel fill initialChild={0} play={3000}>
                     <Box fill>
                       <Image
                         fill
@@ -164,7 +164,7 @@ export const AboutPage = () => {
                         fill
                         style={{ minWidth: "1134px" }}
                         src={promo3}
-                        alt="Promo 1"
+                        alt="Promo 3"
                       />
                     </Box>
                   </Carousel>

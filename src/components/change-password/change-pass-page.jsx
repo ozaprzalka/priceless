@@ -142,7 +142,7 @@ const ChangePassForm = ({ history }) => {
                     <TextInput
                       style={inputStyle}
                       type="password"
-                      name="ConfirmPassword"
+                      name="confirmPassword"
                     />
                   </FormField>
                   <Button size="large" type="submit" label="CHANGE" primary />

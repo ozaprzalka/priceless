@@ -44,7 +44,6 @@ const MembersDashboard = () => {
       link: link,
     };
     if (link && link !== undefined && name && name !== undefined) {
-        console.log("doesn t")
         database
         .collection("links")
         .doc(currentUser.uid)

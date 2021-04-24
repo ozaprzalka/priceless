@@ -44,13 +44,13 @@ const MembersDashboard = () => {
       link: link,
     };
     if (link && link !== undefined && name && name !== undefined) {
-      database
+        console.log("doesn t")
+        database
         .collection("links")
         .doc(currentUser.uid)
-        .update({
+        .set({
           links: firebase.firestore.FieldValue.arrayUnion(savedLink),
-        });
-      setName("");
+        }, { merge: true });      
     }
   };
 

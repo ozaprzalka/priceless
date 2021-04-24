@@ -34,9 +34,7 @@ const AccountPage = () => {
   useEffect(() => {
     const setusr = document.get().then((snapshot) => {
       setUserDetails(snapshot.data());
-      console.log("1 render");
     });
-    console.log("2 render");
     return setusr;
   }, []); //eslint-disable-line
 
@@ -52,7 +50,6 @@ const AccountPage = () => {
         displayName: newName,
       })
       .then(function () {
-        console.log("new name ", currentUser.displayName);
         document
           .update({
             name: newName,
@@ -96,8 +93,6 @@ const AccountPage = () => {
                 <Text>email: {currentUser.email}</Text>
                 <Text> username: {userDetails.name}</Text>
                 <Text>created: {currentUser.metadata.lastSignInTime}</Text>
-                <Text>{console.log(currentUser)}</Text>
-                <Text>{console.log(userDetails)}</Text>
               </Box>
               <Box
                 border={{ color: "brand", size: size }}
@@ -166,8 +161,6 @@ const AccountPage = () => {
                 <Text>email: {currentUser.email}</Text>
                 <Text> username: {userDetails.name}</Text>
                 <Text>created: {currentUser.metadata.lastSignInTime}</Text>
-                <Text>{console.log(currentUser)}</Text>
-                <Text>{console.log(userDetails)}</Text>
               </Box>
               <Box
                 border={{ color: "brand", size: "medium" }}
